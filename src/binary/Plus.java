@@ -1,35 +1,48 @@
 package binary;
 
+import operands.Num;
+import operands.Var;
 import structure.BinaryExpression;
 import structure.Expression;
-
-import java.util.Map;
 
 /**
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
 public class Plus extends BinaryExpression {
-    private Expression a;
-    private Expression b;
+    public Plus(double a, double b) {
+        this(new Num(a), new Num(b));
+    }
 
     public Plus(Expression a, Expression b) {
-        this.a = a;
-        this.b = b;
+        super(a, b);
+    }
+
+    public Plus(double a, String b) {
+        this(new Num(a), new Var(b));
+    }
+
+    public Plus(String a, double b) {
+        this(new Var(a), new Num(b));
+    }
+
+    public Plus(String a, String b) {
+        this(new Var(a), new Var(b));
     }
 
     @Override
-    public double evaluate(Map<String, Double> assignment) throws Exception {
-        return a.evaluate(assignment) + b.evaluate(assignment);
+    public double operate(double a, double b) {
+        return a + b;
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
-        return new Plus(a.assign(var, expression), b.assign(var, expression));
+    public Expression create(Expression a, Expression b) {
+        return new Plus(a, b);
     }
 
     @Override
-    public String toString() {
+    public String toString(Expression a, Expression b) {
         return "(" + a + " + " + b + ")";
     }
+
 }

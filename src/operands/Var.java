@@ -5,7 +5,6 @@ import structure.Expression;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Raziel Solomon
@@ -25,10 +24,10 @@ public class Var implements Expression {
 
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
-        if (!assignment.containsKey(value)) {
-            throw new Exception("Assignment doesn't contain " + value);
-        } else {
+        if (assignment.containsKey(value)) {
             return assignment.get(value);
+        } else {
+            throw new Exception("Assignment doesn't contain " + value);
         }
     }
 
@@ -45,7 +44,7 @@ public class Var implements Expression {
 
     @Override
     public Expression assign(String var, Expression expression) {
-        if (Objects.equals(value, var)) {
+        if (value == var) {
             return expression;
         } else {
             return this;
