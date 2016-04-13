@@ -21,11 +21,26 @@ public class Num implements Expression {
         this.value = num;
     }
 
+    /**
+     * returns a nice string representation of the expression.
+     *
+     * @return string representation
+     */
     @Override
     public String toString() {
         return "" + value;
     }
 
+    /**
+     * evaluate the expression using the variable values provided
+     * in the assignment, and return the result.  If the expression
+     * contains a variable which is not in the assignment, an exception
+     * is thrown.
+     *
+     * @param assignment variables' values to assign
+     * @return equation solution for the assignment
+     * @throws Exception
+     */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
         return value;

@@ -13,10 +13,20 @@ import java.util.Map;
 public class Var implements Expression {
     private String value;
 
+    /**
+     * constructor.
+     *
+     * @param value a string variable.
+     */
     public Var(String value) {
         this.value = value;
     }
 
+    /**
+     * returns a nice string representation of the expression.
+     *
+     * @return string representation
+     */
     @Override
     public String toString() {
         return value;
