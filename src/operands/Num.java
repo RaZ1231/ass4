@@ -12,6 +12,11 @@ import java.util.Map;
 public class Num implements Expression {
     private double value;
 
+    /**
+     * constructor.
+     *
+     * @param num a number.
+     */
     public Num(double num) {
         this.value = num;
     }
