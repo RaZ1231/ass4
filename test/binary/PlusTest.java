@@ -23,22 +23,8 @@ public class PlusTest {
     }
 
     @Test
-    public void toStringTest() throws Exception {
+    public void stoString() throws Exception {
 
     }
 
-    @Test
-    public void evaluate() throws Exception {
-
-    }
-
-    @Test
-    public void getVariables() throws Exception {
-
-    }
-
-    @Test
-    public void assign() throws Exception {
-
-    }
 }
