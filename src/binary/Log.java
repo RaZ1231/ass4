@@ -13,21 +13,21 @@ public class Log extends BinaryExpression {
     /**
      * constructor.
      *
-     * @param a an expression.
-     * @param b another expression.
-     */
-    public Log(Expression a, Expression b) {
-        super(a, b);
-    }
-
-    /**
-     * constructor.
-     *
      * @param a a double variable.
      * @param b another double variable.
      */
     public Log(double a, double b) {
         this(new Num(a), new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Log(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**
@@ -80,19 +80,33 @@ public class Log extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public Expression create(Expression a, Expression b) {
+    public BinaryExpression create(Expression a, Expression b) {
         return new Log(a, b);
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @param a left expression
+     * @param b right expression
+     * @return simplified expression
+     */
+    @Override
+    public Expression simple(Expression a, Expression b) {
+        if (a.equals(b)) {
+            return new Num(1);
+        } else {
+            return new Log(a, b);
+        }
     }
 
     /**
      * returns a nice string representation of the expression.
      *
-     * @param a an expression.
-     * @param b another expression.
      * @return string representation.
      */
     @Override
-    public String toString(Expression a, Expression b) {
-        return "log(" + a + ", " + b + ")";
+    public String toString() {
+        return "log(" + getA() + ", " + getB() + ")";
     }
 }

@@ -56,4 +56,32 @@ public interface Expression {
      * @return modified expression
      */
     Expression assign(String var, Expression expression);
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return simplified expression
+     */
+    Expression simplify();
+
+    /**
+     * checks if zero
+     *
+     * @return true\false
+     */
+    boolean isZero();
+
+    /**
+     * checks if one
+     *
+     * @return true/false
+     */
+    boolean isOne();
+
+    /**
+     * checks if even
+     *
+     * @return true/false
+     */
+    boolean isEven();
 }

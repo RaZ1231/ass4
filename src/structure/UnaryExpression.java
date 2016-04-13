@@ -1,5 +1,7 @@
 package structure;
 
+import operands.Num;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public abstract class UnaryExpression extends BaseExpression {
      */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
-        return operate(a.evaluate(assignment));
+        return operate(getA().evaluate(assignment));
     }
 
     /**
@@ -41,18 +43,10 @@ public abstract class UnaryExpression extends BaseExpression {
      * @param a a parameter.
      * @return operation result.
      */
-    public abstract double operate(double a);
+    protected abstract double operate(double a);
 
-    /**
-     * A convenience method. Similar to `evaluate(assignment)` method above,
-     * but uses an empty assignment.
-     *
-     * @return equation solution
-     * @throws Exception
-     */
-    @Override
-    public double evaluate() throws Exception {//////////what is it??????
-        return  0;
+    public Expression getA() {
+        return a;
     }
 
     /**
@@ -64,7 +58,7 @@ public abstract class UnaryExpression extends BaseExpression {
     public List<String> getVariables() {
         List<String> vars = new LinkedList<String>();
 
-        vars.addAll(a.getVariables());
+        vars.addAll(getA().getVariables());
         return vars;
     }
 
@@ -79,7 +73,7 @@ public abstract class UnaryExpression extends BaseExpression {
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return create(a.assign(var, expression));
+        return create(getA().assign(var, expression));
     }
 
     /**
@@ -88,24 +82,37 @@ public abstract class UnaryExpression extends BaseExpression {
      * @param a an expression.
      * @return a new expression by type.
      */
-    public abstract Expression create(Expression a);
+    protected abstract UnaryExpression create(Expression a);
 
     /**
-     * returns a nice string representation of the expression.
+     * Returned a simplified version of the current expression.
      *
-     * @return string representation.
+     * @return simplified expression
      */
     @Override
-    public String toString() {
-        return toString(a);
+    public Expression simplify() {
+        Expression simpleA = getA().simplify();
+        UnaryExpression simpleExpression = create(simpleA);
+        Expression newExpression = null;
+
+        if (simpleExpression.getA() instanceof Num) {
+            try {
+                newExpression = new Num(simpleExpression.evaluate());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            newExpression = simpleExpression.simple(simpleExpression.getA());
+        }
+
+        return newExpression;
     }
 
     /**
-     * returns a nice string representation of the expression.
+     * Returned a simplified version of the current expression.
      *
-     * @param a an expression.
-     * @return string representation.
+     * @param a left expression
+     * @return simplified expression
      */
-    public abstract String toString(Expression a);
-
+    protected abstract Expression simple(Expression a);
 }

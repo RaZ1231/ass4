@@ -16,7 +16,7 @@ public class Const implements Expression {
     /**
      * constructor.
      *
-     * @param name a string.
+     * @param name  a string.
      * @param value a number.
      */
     public Const(String name, double value) {
@@ -31,8 +31,17 @@ public class Const implements Expression {
      */
     @Override
     public String toString() {
+        return getName();
+    }
+
+    public String getName() {
         return name;
     }
+
+    public double getValue() {
+        return value;
+    }
+
 
     /**
      * evaluate the expression using the variable values provided
@@ -82,6 +91,46 @@ public class Const implements Expression {
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return this;
+        return new Const(getName(), getValue());
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return simplified expression
+     */
+    @Override
+    public Expression simplify() {
+        return new Const(getName(), getValue());
+    }
+
+    /**
+     * checks if zero
+     *
+     * @return true\false
+     */
+    @Override
+    public boolean isZero() {
+        return getValue() == 0;
+    }
+
+    /**
+     * checks if one
+     *
+     * @return true/false
+     */
+    @Override
+    public boolean isOne() {
+        return getValue() == 1;
+    }
+
+    /**
+     * checks if even
+     *
+     * @return true/false
+     */
+    @Override
+    public boolean isEven() {
+        return getValue() % 2 == 0;
     }
 }

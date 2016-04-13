@@ -29,15 +29,19 @@ public class Var implements Expression {
      */
     @Override
     public String toString() {
+        return getValue();
+    }
+
+    public String getValue() {
         return value;
     }
 
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
-        if (assignment.containsKey(value)) {
-            return assignment.get(value);
+        if (assignment.containsKey(getValue())) {
+            return assignment.get(getValue());
         } else {
-            throw new Exception("Assignment doesn't contain " + value);
+            throw new Exception("Assignment doesn't contain " + getValue());
         }
     }
 
@@ -48,16 +52,56 @@ public class Var implements Expression {
 
     @Override
     public List<String> getVariables() {
-        return Collections.singletonList(value);
+        return Collections.singletonList(getValue());
     }
 
 
     @Override
     public Expression assign(String var, Expression expression) {
-        if (value == var) {
+        if (getValue() == var) {
             return expression;
         } else {
-            return this;
+            return new Var(getValue());
         }
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return simplified expression
+     */
+    @Override
+    public Expression simplify() {
+        return new Var(getValue());
+    }
+
+    /**
+     * checks if zero
+     *
+     * @return true\false
+     */
+    @Override
+    public boolean isZero() {
+        return false;
+    }
+
+    /**
+     * checks if one
+     *
+     * @return true/false
+     */
+    @Override
+    public boolean isOne() {
+        return false;
+    }
+
+    /**
+     * checks if even
+     *
+     * @return true/false
+     */
+    @Override
+    public boolean isEven() {
+        return false;
     }
 }

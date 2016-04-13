@@ -13,19 +13,19 @@ public class Neg extends UnaryExpression {
     /**
      * constructor.
      *
-     * @param a an expression.
+     * @param a a double variable.
      */
-    public Neg(Expression a) {
-        super(a);
+    public Neg(double a) {
+        this(new Num(a));
     }
 
     /**
      * constructor.
      *
-     * @param a a double variable.
+     * @param a an expression.
      */
-    public Neg(double a) {
-        this(new Num(a));
+    public Neg(Expression a) {
+        super(a);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Neg extends UnaryExpression {
      */
     @Override
     public double operate(double a) {
-        return -1*a;
+        return -1 * a;
     }
 
     /**
@@ -55,18 +55,32 @@ public class Neg extends UnaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public Expression create(Expression a) {
+    public UnaryExpression create(Expression a) {
         return new Neg(a);
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @param a left expression
+     * @return simplified expression
+     */
+    @Override
+    public Expression simple(Expression a) {
+        if (a instanceof Neg) {
+            return ((Neg) a).getA();
+        } else {
+            return new Neg(a);
+        }
     }
 
     /**
      * returns a nice string representation of the expression.
      *
-     * @param a an expression.
      * @return string representation.
      */
     @Override
-    public String toString(Expression a) {
-        return "(-" + a + ")";
+    public String toString() {
+        return "(-" + getA() + ")";
     }
 }

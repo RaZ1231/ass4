@@ -28,7 +28,11 @@ public class Num implements Expression {
      */
     @Override
     public String toString() {
-        return "" + value;
+        return "" + getValue();
+    }
+
+    public double getValue() {
+        return value;
     }
 
     /**
@@ -43,7 +47,7 @@ public class Num implements Expression {
      */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
-        return value;
+        return getValue();
     }
 
     @Override
@@ -59,6 +63,46 @@ public class Num implements Expression {
 
     @Override
     public Expression assign(String var, Expression expression) {
-        return this;
+        return new Num(getValue());
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return simplified expression
+     */
+    @Override
+    public Expression simplify() {
+        return new Num(getValue());
+    }
+
+    /**
+     * checks if zero
+     *
+     * @return true\false
+     */
+    @Override
+    public boolean isZero() {
+        return getValue() == 0;
+    }
+
+    /**
+     * checks if one
+     *
+     * @return true/false
+     */
+    @Override
+    public boolean isOne() {
+        return getValue() == 1;
+    }
+
+    /**
+     * checks if even
+     *
+     * @return true/false
+     */
+    @Override
+    public boolean isEven() {
+        return getValue() % 2 == 0;
     }
 }

@@ -13,21 +13,21 @@ public class Plus extends BinaryExpression {
     /**
      * constructor.
      *
-     * @param a an expression.
-     * @param b another expression.
-     */
-    public Plus(Expression a, Expression b) {
-        super(a, b);
-    }
-
-    /**
-     * constructor.
-     *
      * @param a a double variable.
      * @param b another double variable.
      */
     public Plus(double a, double b) {
         this(new Num(a), new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Plus(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**
@@ -80,20 +80,37 @@ public class Plus extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public Expression create(Expression a, Expression b) {
+    public BinaryExpression create(Expression a, Expression b) {
         return new Plus(a, b);
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @param a left expression
+     * @param b right expression
+     * @return simplified expression
+     */
+    @Override
+    public Expression simple(Expression a, Expression b) {
+        if (a.isZero()) {
+            return b;
+        } else if (b.isZero()) {
+            return a;
+        } else if (a.equals(b)) {
+            return new Mult(new Num(2), a);
+        } else {
+            return new Plus(a, b);
+        }
     }
 
     /**
      * returns a nice string representation of the expression.
      *
-     * @param a an expression.
-     * @param b another expression.
      * @return string representation.
      */
     @Override
-    public String toString(Expression a, Expression b) {
-        return "(" + a + " + " + b + ")";
+    public String toString() {
+        return "(" + getA() + " + " + getB() + ")";
     }
-
 }

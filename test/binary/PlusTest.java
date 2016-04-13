@@ -10,7 +10,7 @@ import org.junit.Test;
 public class PlusTest {
     @Test
     public void operate() throws Exception {
-        Plus plus = new Plus(5, 6);
+        Plus plus = new Plus(0, 0);
         double expected = 11;
         double actual = plus.operate(5, 6);
 

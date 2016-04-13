@@ -9,16 +9,7 @@ import structure.UnaryExpression;
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
-public class Cos extends UnaryExpression{
-    /**
-     * constructor..
-     *
-     * @param a an expression.
-     */
-    public Cos(Expression a) {
-        super(a);
-    }
-
+public class Cos extends UnaryExpression {
     /**
      * constructor.
      *
@@ -26,6 +17,15 @@ public class Cos extends UnaryExpression{
      */
     public Cos(double a) {
         this(new Num(a));
+    }
+
+    /**
+     * constructor..
+     *
+     * @param a an expression.
+     */
+    public Cos(Expression a) {
+        super(a);
     }
 
     /**
@@ -55,18 +55,28 @@ public class Cos extends UnaryExpression{
      * @return a new expression by type.
      */
     @Override
-    public Expression create(Expression a) {
+    public UnaryExpression create(Expression a) {
+        return new Cos(a);
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @param a left expression
+     * @return simplified expression
+     */
+    @Override
+    public Expression simple(Expression a) {
         return new Cos(a);
     }
 
     /**
      * returns a nice string representation of the expression.
      *
-     * @param a an expression.
      * @return string representation.
      */
     @Override
-    public String toString(Expression a) {
-        return "Cos(" + a + ")";
+    public String toString() {
+        return "Cos(" + getA() + ")";
     }
 }

@@ -13,19 +13,19 @@ public class Sin extends UnaryExpression {
     /**
      * constructor.
      *
-     * @param a an expression.
+     * @param a a double variable.
      */
-    public Sin(Expression a) {
-        super(a);
+    public Sin(double a) {
+        this(new Num(a));
     }
 
     /**
      * constructor.
      *
-     * @param a a double variable.
+     * @param a an expression.
      */
-    public Sin(double a) {
-        this(new Num(a));
+    public Sin(Expression a) {
+        super(a);
     }
 
     /**
@@ -55,18 +55,28 @@ public class Sin extends UnaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public Expression create(Expression a) {
+    public UnaryExpression create(Expression a) {
+        return new Sin(a);
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @param a left expression
+     * @return simplified expression
+     */
+    @Override
+    public Expression simple(Expression a) {
         return new Sin(a);
     }
 
     /**
      * returns a nice string representation of the expression.
      *
-     * @param a an expression.
      * @return string representation.
      */
     @Override
-    public String toString(Expression a) {
-        return "Sin(" + a + ")";
+    public String toString() {
+        return "Sin(" + getA() + ")";
     }
 }
