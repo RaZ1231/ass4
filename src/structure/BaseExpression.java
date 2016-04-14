@@ -50,4 +50,24 @@ public abstract class BaseExpression implements Expression {
     public boolean isEven() {
         return false;
     }
+
+    /**
+     * returns the expression tree resulting from differentiating
+     * the current expression relative to variable `var`.
+     *
+     * @param var a string variable.
+     * @return the differentiate of the expression.
+     */
+    public Expression differentiate(String var) {
+        return derivative(var);
+    }
+
+    /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    public abstract Expression derivative(String var);
+
 }

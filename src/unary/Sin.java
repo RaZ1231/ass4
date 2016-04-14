@@ -2,6 +2,7 @@ package unary;
 
 import operands.Num;
 import operands.Var;
+import binary.Mult;
 import structure.Expression;
 import structure.UnaryExpression;
 
@@ -57,6 +58,17 @@ public class Sin extends UnaryExpression {
     @Override
     public UnaryExpression create(Expression a) {
         return new Sin(a);
+    }
+
+    /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    @Override
+    public Expression derivative(String var) {
+        return new Mult(new Cos(getA()), getA().differentiate(var));
     }
 
     /**

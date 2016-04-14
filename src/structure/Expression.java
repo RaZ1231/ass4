@@ -58,7 +58,7 @@ public interface Expression {
     Expression assign(String var, Expression expression);
 
     /**
-     * Returned a simplified version of the current expression.
+     * returns a simplified version of the current expression.
      *
      * @return simplified expression
      */
@@ -84,4 +84,13 @@ public interface Expression {
      * @return true/false
      */
     boolean isEven();
+
+    /**
+     * returns the expression tree resulting from differentiating
+     * the current expression relative to variable `var`.
+     *
+     * @param var a string variable.
+     * @return the differentiate of the expression.
+     */
+    Expression differentiate(String var);
 }

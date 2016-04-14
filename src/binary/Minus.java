@@ -86,6 +86,17 @@ public class Minus extends BinaryExpression {
     }
 
     /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    @Override
+    public Expression derivative(String var) {
+        return new Minus(getA().differentiate(var), getB().differentiate(var));
+    }
+
+    /**
      * Returned a simplified version of the current expression.
      *
      * @param a left expression

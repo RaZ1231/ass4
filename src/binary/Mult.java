@@ -85,6 +85,18 @@ public class Mult extends BinaryExpression {
     }
 
     /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    @Override
+    public Expression derivative(String var) {
+        return new Plus(new Mult(getA().differentiate(var), getB()),
+                new Mult(getA(), getB().differentiate(var)));
+    }
+
+    /**
      * Returned a simplified version of the current expression.
      *
      * @param a left expression
@@ -99,6 +111,8 @@ public class Mult extends BinaryExpression {
             return a;
         } else if (a.equals(b)) {
             return new Pow(a, new Num(2));
+        } else if (a.isZero()||b.isZero()) {
+            return new Num(0);
         } else {
             return new Mult(a, b);
         }

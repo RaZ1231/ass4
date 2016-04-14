@@ -1,5 +1,6 @@
 package binary;
 
+import operands.Const;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -82,6 +83,22 @@ public class Pow extends BinaryExpression {
     @Override
     public BinaryExpression create(Expression a, Expression b) {
         return new Pow(getA(), getB());
+    }
+
+    /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    @Override
+    public Expression derivative(String var) {
+        return new Mult(new Pow(getA(), getB()),
+                new Plus(
+                        new Mult(getA().differentiate(var),
+                                new Div(getB(),getA())),
+                        new Mult(getB().differentiate(var),
+                                new Log(new Const("e" ,Math.exp(1)),getA()))));
     }
 
     /**

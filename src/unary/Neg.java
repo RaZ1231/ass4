@@ -60,6 +60,17 @@ public class Neg extends UnaryExpression {
     }
 
     /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    @Override
+    public Expression derivative(String var) {
+        return new Neg(getA().differentiate(var));
+    }
+
+    /**
      * Returned a simplified version of the current expression.
      *
      * @param a left expression

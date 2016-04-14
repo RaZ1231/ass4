@@ -31,6 +31,11 @@ public class Num implements Expression {
         return "" + getValue();
     }
 
+    /**
+     * returns num's value.
+     *
+     * @return num's value.
+     */
     public double getValue() {
         return value;
     }
@@ -50,17 +55,37 @@ public class Num implements Expression {
         return getValue();
     }
 
+    /**
+     * a convenience method. Similar to `evaluate(assignment)` method above,
+     * but uses an empty assignment.
+     *
+     * @return equation solution
+     * @throws Exception
+     */
     @Override
     public double evaluate() throws Exception {
         return evaluate(null);
     }
 
+    /**
+     * returns a list of the variables in the expression.
+     *
+     * @return list containing the variables in the expression.
+     */
     @Override
     public List<String> getVariables() {
         return null;
     }
 
-
+    /**
+     * returns a new expression in which all occurrences of the variable
+     * var are replaced with the provided expression (Does not modify the
+     * current expression).
+     *
+     * @param var        variable to replace
+     * @param expression expression to put instead
+     * @return modified expression
+     */
     @Override
     public Expression assign(String var, Expression expression) {
         return new Num(getValue());
@@ -104,5 +129,17 @@ public class Num implements Expression {
     @Override
     public boolean isEven() {
         return getValue() % 2 == 0;
+    }
+
+    /**
+     * returns the expression tree resulting from differentiating
+     * the current expression relative to variable `var`.
+     *
+     * @param var a string variable.
+     * @return the differentiate of the expression.
+     */
+    @Override
+    public Expression differentiate(String var) {
+        return new Num(0);
     }
 }

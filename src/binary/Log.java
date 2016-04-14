@@ -1,5 +1,6 @@
 package binary;
 
+import operands.Const;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -69,7 +70,7 @@ public class Log extends BinaryExpression {
      */
     @Override
     public double operate(double a, double b) {
-        return Math.log(a) / Math.log(b);
+        return Math.log(b) / Math.log(a);
     }
 
     /**
@@ -82,6 +83,20 @@ public class Log extends BinaryExpression {
     @Override
     public BinaryExpression create(Expression a, Expression b) {
         return new Log(a, b);
+    }
+
+    /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    @Override
+    public Expression derivative(String var) {
+        return new Mult(
+                new Div(
+                        new Num(1), new Mult(getB(), new Log(new Const("e" , Math.exp(1)),getA()))),
+                getB().differentiate(var));
     }
 
     /**

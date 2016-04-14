@@ -85,6 +85,14 @@ public abstract class UnaryExpression extends BaseExpression {
     protected abstract UnaryExpression create(Expression a);
 
     /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    public abstract Expression derivative(String var);
+
+    /**
      * Returned a simplified version of the current expression.
      *
      * @return simplified expression

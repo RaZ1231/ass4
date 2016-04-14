@@ -34,14 +34,23 @@ public class Const implements Expression {
         return getName();
     }
 
+    /**
+     * returns const's name.
+     *
+     * @return const's name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * returns const's value.
+     *
+     * @return const's value.
+     */
     public double getValue() {
         return value;
     }
-
 
     /**
      * evaluate the expression using the variable values provided
@@ -132,5 +141,17 @@ public class Const implements Expression {
     @Override
     public boolean isEven() {
         return getValue() % 2 == 0;
+    }
+
+    /**
+     * returns the expression tree resulting from differentiating
+     * the current expression relative to variable `var`.
+     *
+     * @param var a string variable.
+     * @return the differentiate of the expression.
+     */
+    @Override
+    public Expression differentiate(String var) {
+        return new Num(0);
     }
 }

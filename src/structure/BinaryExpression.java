@@ -96,6 +96,14 @@ public abstract class BinaryExpression extends BaseExpression {
     protected abstract BinaryExpression create(Expression a, Expression b);
 
     /**
+     * returns the derivative of an expression.
+     *
+     * @param var a string variable.
+     * @return the derivative of an expression.
+     */
+    public abstract Expression derivative(String var);
+
+    /**
      * Returned a simplified version of the current expression.
      *
      * @return simplified expression
