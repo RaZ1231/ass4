@@ -62,6 +62,16 @@ public class Pow extends BinaryExpression {
     }
 
     /**
+     * constructor.
+     *
+     * @param a a string variable.
+     * @param b a string variable.
+     */
+    public Pow(Const a, String b) {
+        this(a, new Var(b));
+    }
+
+    /**
      * an operation function.
      *
      * @param a a parameter.
@@ -96,9 +106,9 @@ public class Pow extends BinaryExpression {
         return new Mult(new Pow(getA(), getB()),
                 new Plus(
                         new Mult(getA().differentiate(var),
-                                new Div(getB(),getA())),
+                                new Div(getB(), getA())),
                         new Mult(getB().differentiate(var),
-                                new Log(new Const("e" ,Math.exp(1)),getA()))));
+                                new Log(new Const("e", Math.exp(1)), getA()))));
     }
 
     /**

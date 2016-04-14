@@ -12,9 +12,8 @@ import org.junit.Test;
 public class DivTest {
     @Test
     public void operate() throws Exception {
-        Div div = new Div(0, 0);
-        double actual = div.operate(6, 12);
         double expected = 0.5;
+        double actual = new Div(0, 0).operate(6, 12);
 
         Assert.assertEquals(expected, actual, 0);
     }
@@ -29,15 +28,16 @@ public class DivTest {
 
     @Test
     public void derivative() throws Exception {
-        Div div = new Div(new Var("x"), new Num(4));
-        String expected = new Num(0.25).toString();
-        String actual = div.differentiate("x").simplify().toString();
+        String expected = "0.25";
+        String actual = new Div("x", 4).differentiate("x").simplify().toString();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void simple() throws Exception {
+        String expected = "x";
+        String actual = new Div(0, 0).simple(new Var("x"), new Num(1)).toString();
 
     }
 

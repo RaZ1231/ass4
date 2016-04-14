@@ -95,7 +95,7 @@ public class Log extends BinaryExpression {
     public Expression derivative(String var) {
         return new Mult(
                 new Div(
-                        new Num(1), new Mult(getB(), new Log(new Const("e" , Math.exp(1)),getA()))),
+                        new Num(1), new Mult(getB(), new Log(new Const("e", Math.exp(1)), getA()))),
                 getB().differentiate(var));
     }
 

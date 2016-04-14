@@ -10,9 +10,8 @@ import org.junit.Test;
 public class PlusTest {
     @Test
     public void operate() throws Exception {
-        Plus plus = new Plus(0, 0);
         double expected = 11;
-        double actual = plus.operate(5, 6);
+        double actual = new Plus(0, 0).operate(5, 6);
 
         Assert.assertEquals(expected, actual, 0);
     }
@@ -23,7 +22,7 @@ public class PlusTest {
     }
 
     @Test
-    public void stoString() throws Exception {
+    public void toStringTest() throws Exception {
 
     }
 
