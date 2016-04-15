@@ -10,7 +10,7 @@ import unary.Neg;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Minus extends BinaryExpression {
+public class Minus extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -81,7 +81,7 @@ public class Minus extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public BinaryExpression create(Expression a, Expression b) {
+    public Expression create(Expression a, Expression b) {
         return new Minus(a, b);
     }
 
@@ -99,20 +99,18 @@ public class Minus extends BinaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
-     * @param b right expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a, Expression b) {
-        if (a.isZero()) {
-            return new Neg(b);
-        } else if (b.isZero()) {
-            return a;
-        } else if (a.equals(b)) {
+    public Expression simple() {
+        if (getA().isZero()) {
+            return new Neg(getB());
+        } else if (getB().isZero()) {
+            return getA();
+        } else if (getA().equals(getB())) {
             return new Num(0);
         } else {
-            return new Minus(a, b);
+            return new Minus(getA(), getB());
         }
     }
 

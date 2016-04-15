@@ -1,8 +1,8 @@
 package unary;
 
+import binary.Mult;
 import operands.Num;
 import operands.Var;
-import binary.Mult;
 import structure.Expression;
 import structure.UnaryExpression;
 
@@ -10,7 +10,7 @@ import structure.UnaryExpression;
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
-public class Sin extends UnaryExpression {
+public class Sin extends UnaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -56,7 +56,7 @@ public class Sin extends UnaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public UnaryExpression create(Expression a) {
+    public Expression create(Expression a) {
         return new Sin(a);
     }
 
@@ -74,12 +74,11 @@ public class Sin extends UnaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a) {
-        return new Sin(a);
+    public Expression simple() {
+        return new Sin(getA());
     }
 
     /**
@@ -89,6 +88,6 @@ public class Sin extends UnaryExpression {
      */
     @Override
     public String toString() {
-        return "Sin(" + getA() + ")";
+        return "sin(" + getA() + ")";
     }
 }

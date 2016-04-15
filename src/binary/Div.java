@@ -9,7 +9,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Div extends BinaryExpression {
+public class Div extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -80,7 +80,7 @@ public class Div extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public BinaryExpression create(Expression a, Expression b) {
+    public Expression create(Expression a, Expression b) {
         return new Div(a, b);
     }
 
@@ -102,21 +102,19 @@ public class Div extends BinaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
-     * @param b right expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a, Expression b) {
+    public Expression simple() {
         //if (a.isOne()) {
         //   return new Pow(a, new Neg(1));
         //} else
-        if (b.isOne()) {
-            return a;
-        } else if (a.equals(b)) {
+        if (getB().isOne()) {
+            return getA();
+        } else if (getA().equals(getB())) {
             return new Num(1);
         } else {
-            return new Div(a, b);
+            return new Div(getA(), getB());
         }
     }
 

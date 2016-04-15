@@ -31,8 +31,14 @@ public class LogTest {
     @Test
     public void derivative() throws Exception {
         Expression a = new Log(new Num(4), new Var("x"));
-        Expression expected = new Div(new Num(1), new Mult(new Var("x"), new
-                Log(new Const("e", Math.exp(1)), new Num(4))));
+        Expression expected = new Div(
+                new Num(1),
+                new Mult(
+                        "x",
+                        new Log(
+                                new Const("e", Math.exp(1)),
+                                new Num(4)).evaluate()
+                ));
 
         Expression actual = a.differentiate("x").simplify();
 

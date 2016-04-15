@@ -10,7 +10,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Log extends BinaryExpression {
+public class Log extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -81,7 +81,7 @@ public class Log extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public BinaryExpression create(Expression a, Expression b) {
+    public Expression create(Expression a, Expression b) {
         return new Log(a, b);
     }
 
@@ -102,16 +102,14 @@ public class Log extends BinaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
-     * @param b right expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a, Expression b) {
-        if (a.equals(b)) {
+    public Expression simple() {
+        if (getA().equals(getB())) {
             return new Num(1);
         } else {
-            return new Log(a, b);
+            return new Log(getA(), getB());
         }
     }
 

@@ -9,7 +9,7 @@ import structure.UnaryExpression;
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
-public class Neg extends UnaryExpression {
+public class Neg extends UnaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -55,7 +55,7 @@ public class Neg extends UnaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public UnaryExpression create(Expression a) {
+    public Expression create(Expression a) {
         return new Neg(a);
     }
 
@@ -73,15 +73,14 @@ public class Neg extends UnaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a) {
-        if (a instanceof Neg) {
-            return ((Neg) a).getA();
+    public Expression simple() {
+        if (getA() instanceof Neg) {
+            return ((Neg) getA()).getA();
         } else {
-            return new Neg(a);
+            return new Neg(getA());
         }
     }
 

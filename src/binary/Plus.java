@@ -9,7 +9,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Plus extends BinaryExpression {
+public class Plus extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -80,7 +80,7 @@ public class Plus extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public BinaryExpression create(Expression a, Expression b) {
+    public Expression create(Expression a, Expression b) {
         return new Plus(a, b);
     }
 
@@ -98,20 +98,18 @@ public class Plus extends BinaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
-     * @param b right expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a, Expression b) {
-        if (a.isZero()) {
-            return b;
-        } else if (b.isZero()) {
-            return a;
-        } else if (a.equals(b)) {
-            return new Mult(new Num(2), a);
+    public Expression simple() {
+        if (getA().isZero()) {
+            return getB();
+        } else if (getB().isZero()) {
+            return getA();
+        } else if (getA().equals(getB())) {
+            return new Mult(new Num(2), getA());
         } else {
-            return new Plus(a, b);
+            return new Plus(getA(), getB());
         }
     }
 

@@ -20,7 +20,7 @@ public class ExpressionsTest {
                 new Mult(2, "x"),
                 new Plus(
                         new Sin(new Mult(4, "y")),
-                        new Pow(new Const("e", 2.71), "x")
+                        new Pow(new Const("e", Math.exp(1)), "x")
                 ));
         Map<String, Double> assignment = new TreeMap<>();
 

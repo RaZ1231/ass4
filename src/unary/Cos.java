@@ -10,7 +10,7 @@ import structure.UnaryExpression;
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
-public class Cos extends UnaryExpression {
+public class Cos extends UnaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -56,7 +56,7 @@ public class Cos extends UnaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public UnaryExpression create(Expression a) {
+    public Expression create(Expression a) {
         return new Cos(a);
     }
 
@@ -74,12 +74,11 @@ public class Cos extends UnaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a) {
-        return new Cos(a);
+    public Expression simple() {
+        return new Cos(getA());
     }
 
     /**
@@ -89,6 +88,6 @@ public class Cos extends UnaryExpression {
      */
     @Override
     public String toString() {
-        return "Cos(" + getA() + ")";
+        return "cos(" + getA() + ")";
     }
 }

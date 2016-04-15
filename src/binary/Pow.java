@@ -10,7 +10,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Pow extends BinaryExpression {
+public class Pow extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
@@ -91,7 +91,7 @@ public class Pow extends BinaryExpression {
      * @return a new expression by type.
      */
     @Override
-    public BinaryExpression create(Expression a, Expression b) {
+    public Expression create(Expression a, Expression b) {
         return new Pow(getA(), getB());
     }
 
@@ -114,22 +114,20 @@ public class Pow extends BinaryExpression {
     /**
      * Returned a simplified version of the current expression.
      *
-     * @param a left expression
-     * @param b right expression
      * @return simplified expression
      */
     @Override
-    public Expression simple(Expression a, Expression b) {
-        if (a.isZero() || a.isOne()) {
-            return a;
-        } else if (b.isOne()) {
-            return a;
-        } else if (b.isZero()) {
+    public Expression simple() {
+        if (getA().isZero() || getA().isOne()) {
+            return getA();
+        } else if (getB().isOne()) {
+            return getA();
+        } else if (getB().isZero()) {
             return new Num(1);
             //} else if (a instanceof Neg && b.isEven()) {
             //    return new Pow(a, new Num(2));
         } else {
-            return new Pow(a, b);
+            return new Pow(getA(), getB());
         }
     }
 

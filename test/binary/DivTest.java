@@ -1,7 +1,6 @@
 package binary;
 
 import operands.Num;
-import operands.Var;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,7 +26,7 @@ public class DivTest {
     }
 
     @Test
-    public void derivative() throws Exception {
+    public void differentiate() throws Exception {
         String expected = "0.25";
         String actual = new Div("x", 4).differentiate("x").simplify().toString();
 
@@ -37,8 +36,17 @@ public class DivTest {
     @Test
     public void simple() throws Exception {
         String expected = "x";
-        String actual = new Div(0, 0).simple(new Var("x"), new Num(1)).toString();
+        String actual = new Div("x", 1).simple().toString();
 
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void simplify() throws Exception {
+        String expected = "0.25";
+        String actual = new Div(4, 16).simplify().toString();
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

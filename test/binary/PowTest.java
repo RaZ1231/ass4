@@ -1,13 +1,10 @@
 package binary;
 
-import operands.Const;
 import operands.Num;
 import operands.Var;
 import org.junit.Assert;
 import org.junit.Test;
-import structure.BinaryExpression;
 import structure.Expression;
-import static org.junit.Assert.*;
 
 /**
  * @author Elisheva Broyer.
@@ -27,7 +24,7 @@ public class PowTest {
     @Test
     public void create() throws Exception {
         Pow expected = new Pow(1,2);
-        BinaryExpression actual = expected.create(new Num(1), new Num(2));
+        Expression actual = expected.create(new Num(1), new Num(2));
 
         Assert.assertEquals(expected.toString(), actual.toString());
     }
