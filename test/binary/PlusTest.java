@@ -1,7 +1,8 @@
 package binary;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * @author Raziel Solomon
@@ -13,17 +14,39 @@ public class PlusTest {
         double expected = 11;
         double actual = new Plus(0, 0).operate(5, 6);
 
-        Assert.assertEquals(expected, actual, 0);
+        assertEquals(expected, actual, 0);
     }
 
     @Test
-    public void create() throws Exception {
+    public void equalsTrue() throws Exception {
+        Plus plus1 = new Plus("x", 5);
+        Plus plus2 = new Plus("x", 5);
 
+        assertTrue(plus1.equals(plus2));
     }
 
     @Test
-    public void toStringTest() throws Exception {
+    public void equalsFalse() throws Exception {
+        Plus plus1 = new Plus("x", 5);
+        Plus plus2 = new Plus(5, "x");
 
+        assertFalse(plus1.equals(plus2));
+    }
+
+    @Test
+    public void equalsTrueComplicated() throws Exception {
+        Plus plus1 = new Plus(new Mult("x", 5), new Div("x", 1));
+        Plus plus2 = new Plus(new Mult("x", 5), new Div("x", 1));
+
+        assertTrue(plus1.equals(plus2));
+    }
+
+    @Test
+    public void equalsFalseComplicated() throws Exception {
+        Plus plus1 = new Plus(new Mult("x", 5), new Div("x", 1));
+        Plus plus2 = new Plus(new Mult(1, 5), new Div("x", 1));
+
+        assertFalse(plus1.equals(plus2));
     }
 
 }

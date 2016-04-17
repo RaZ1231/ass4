@@ -1,5 +1,6 @@
 package binary;
 
+import Simplification.MultSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -96,16 +97,6 @@ public class Mult extends BinaryExpression implements Expression {
                 new Mult(getA(), getB().differentiate(var)));
     }
 
-    private Expression simpleLogic(double a, Expression b) throws Exception {
-        if (a == 0) {
-            return new Num(0);
-        } else if (a == 1) {
-            return b;
-        } else {
-            throw new Exception("Nothing to simplify");
-        }
-    }
-
     /**
      * Returned a simplified version of the current expression.
      *
@@ -113,64 +104,11 @@ public class Mult extends BinaryExpression implements Expression {
      */
     @Override
     public Expression simple() {
-        // second attempt
-        try {
-            double value;
-            Expression otherSon;
+        MultSimplifier simplifier = new MultSimplifier();
 
-            try {
-                value = getA().evaluate();
-                otherSon = getB();
-            } catch (Exception e) {
-                value = getB().evaluate();
-                otherSon = getA();
-            }
+        simplifier.initBy(this);
 
-            if (value == 0) {
-                return new Num(0);
-            } else if (value == 1) {
-                return otherSon;
-            } else {
-                throw new Exception("Nothing to simplify");
-            }
-        } catch (Exception NotValue) {
-            if (getA().equals(getB())) {
-                return new Pow(getA(), new Num(2));
-            } else {
-                return new Mult(getA(), getB());
-            }
-        }
-
-
-        /** first attempt
-         try {
-         return simpleLogic(getA().evaluate(), getB());
-         } catch (Exception e) {
-         try {
-         return simpleLogic(getB().evaluate(), getA());
-         } catch (Exception e1) {
-         if (getA().equals(getB())) {
-         return new Pow(getA(), new Num(2));
-         } else {
-         return new Mult(getA(), getB());
-         }
-         }
-         }
-         */
-
-        /**
-         if (getA().isOne()) {
-         return getB();
-         } else if (getB().isOne()) {
-         return getA();
-         } else if (getA().equals(getB())) {
-         return new Pow(getA(), new Num(2));
-         } else if (getA().isZero() || getB().isZero()) {
-         return new Num(0);
-         } else {
-         return new Mult(getA(), getB());
-         }
-         */
+        return simplifier.simplify(this);
     }
 
     /**

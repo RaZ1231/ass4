@@ -1,5 +1,6 @@
 package binary;
 
+import Simplification.LogSimplifier;
 import operands.Const;
 import operands.Num;
 import operands.Var;
@@ -106,11 +107,11 @@ public class Log extends BinaryExpression implements Expression {
      */
     @Override
     public Expression simple() {
-        if (getA().equals(getB())) {
-            return new Num(1);
-        } else {
-            return new Log(getA(), getB());
-        }
+        LogSimplifier simplifier = new LogSimplifier();
+
+        simplifier.initBy(this);
+
+        return simplifier.simplify(this);
     }
 
     /**

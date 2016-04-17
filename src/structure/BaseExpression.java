@@ -15,40 +15,6 @@ import java.util.Map;
  */
 public abstract class BaseExpression {
     /**
-     * a convenience method. Similar to `evaluate(assignment)` method above,
-     * but uses an empty assignment.
-     *
-     * @return equation solution
-     * @throws Exception
-     */
-    public double evaluate() throws Exception {
-        return evaluate(null);
-    }
-
-    /**
-     * Evaluate the expression using the variable values provided
-     * in the assignment, and return the result.  If the expression
-     * contains a variable which is not in the assignment, an exception
-     * is thrown.
-     *
-     * @param assignment variables' values to assign
-     * @return equation solution for the assignment
-     * @throws Exception
-     */
-    public double evaluate(Map<String, Double> assignment) throws Exception {
-        return evaluateSons(assignment);
-    }
-
-    /**
-     * Evaluates sons of expression
-     *
-     * @param assignment variables' values to assign
-     * @return equation solution for the assignment
-     * @throws Exception
-     */
-    protected abstract double evaluateSons(Map<String, Double> assignment) throws Exception;
-
-    /**
      * returns a list of the variables in the expression.
      *
      * @return list containing the variables in the expression.
@@ -92,13 +58,27 @@ public abstract class BaseExpression {
      * @return simplified expression
      */
     public Expression simplify() {
-        Expression simple = simplifySons().simple();
-
         try {
-            return new Num(simple.evaluate());
+            return new Num(evaluate());
         } catch (Exception e) {
-            return simple;
+            Expression simple = simplifySons().simple();
+            try {
+                return new Num(simple.evaluate());
+            } catch (Exception e1) {
+                return simple;
+            }
         }
+    }
+
+    /**
+     * a convenience method. Similar to `evaluate(assignment)` method above,
+     * but uses an empty assignment.
+     *
+     * @return equation solution
+     * @throws Exception
+     */
+    public double evaluate() throws Exception {
+        return evaluate(null);
     }
 
     /**
@@ -114,6 +94,29 @@ public abstract class BaseExpression {
      * @return base expression with simplified sons
      */
     protected abstract BaseExpression simplifySons();
+
+    /**
+     * Evaluate the expression using the variable values provided
+     * in the assignment, and return the result.  If the expression
+     * contains a variable which is not in the assignment, an exception
+     * is thrown.
+     *
+     * @param assignment variables' values to assign
+     * @return equation solution for the assignment
+     * @throws Exception
+     */
+    public double evaluate(Map<String, Double> assignment) throws Exception {
+        return evaluateSons(assignment);
+    }
+
+    /**
+     * Evaluates sons of expression
+     *
+     * @param assignment variables' values to assign
+     * @return equation solution for the assignment
+     * @throws Exception
+     */
+    protected abstract double evaluateSons(Map<String, Double> assignment) throws Exception;
 
     /**
      * checks if zero

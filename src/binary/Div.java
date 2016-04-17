@@ -1,5 +1,6 @@
 package binary;
 
+import Simplification.DivSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -106,16 +107,11 @@ public class Div extends BinaryExpression implements Expression {
      */
     @Override
     public Expression simple() {
-        //if (a.isOne()) {
-        //   return new Pow(a, new Neg(1));
-        //} else
-        if (getB().isOne()) {
-            return getA();
-        } else if (getA().equals(getB())) {
-            return new Num(1);
-        } else {
-            return new Div(getA(), getB());
-        }
+        DivSimplifier simplifier = new DivSimplifier();
+
+        simplifier.initBy(this);
+
+        return simplifier.simplify(this);
     }
 
     /**

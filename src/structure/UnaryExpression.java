@@ -100,4 +100,19 @@ public abstract class UnaryExpression extends BaseExpression {
      * @return the derivative of an expression.
      */
     public abstract Expression derivative(String var);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        UnaryExpression that = (UnaryExpression) o;
+
+        return a != null ? a.equals(that.a) : that.a == null;
+
+    }
 }

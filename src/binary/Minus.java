@@ -1,10 +1,10 @@
 package binary;
 
+import Simplification.MinusSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
 import structure.Expression;
-import unary.Neg;
 
 /**
  * @author Raziel Solomon
@@ -103,15 +103,11 @@ public class Minus extends BinaryExpression implements Expression {
      */
     @Override
     public Expression simple() {
-        if (getA().isZero()) {
-            return new Neg(getB());
-        } else if (getB().isZero()) {
-            return getA();
-        } else if (getA().equals(getB())) {
-            return new Num(0);
-        } else {
-            return new Minus(getA(), getB());
-        }
+        MinusSimplifier simplifier = new MinusSimplifier();
+
+        simplifier.initBy(this);
+
+        return simplifier.simplify(this);
     }
 
     /**

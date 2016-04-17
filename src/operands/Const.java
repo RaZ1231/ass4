@@ -24,6 +24,21 @@ public class Const implements Expression {
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Const aConst = (Const) o;
+
+        return Double.compare(aConst.value, value) == 0;
+
+    }
+
     /**
      * returns a nice string representation of the expression.
      *
@@ -154,4 +169,6 @@ public class Const implements Expression {
     public Expression differentiate(String var) {
         return new Num(0);
     }
+
+
 }

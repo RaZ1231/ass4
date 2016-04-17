@@ -1,5 +1,6 @@
 package binary;
 
+import Simplification.PowSimplifier;
 import operands.Const;
 import operands.Num;
 import operands.Var;
@@ -118,17 +119,11 @@ public class Pow extends BinaryExpression implements Expression {
      */
     @Override
     public Expression simple() {
-        if (getA().isZero() || getA().isOne()) {
-            return getA();
-        } else if (getB().isOne()) {
-            return getA();
-        } else if (getB().isZero()) {
-            return new Num(1);
-            //} else if (a instanceof Neg && b.isEven()) {
-            //    return new Pow(a, new Num(2));
-        } else {
-            return new Pow(getA(), getB());
-        }
+        PowSimplifier simplifier = new PowSimplifier();
+
+        simplifier.initBy(this);
+
+        return simplifier.simplify(this);
     }
 
     /**

@@ -1,5 +1,6 @@
 package binary;
 
+import Simplification.PlusSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -102,15 +103,11 @@ public class Plus extends BinaryExpression implements Expression {
      */
     @Override
     public Expression simple() {
-        if (getA().isZero()) {
-            return getB();
-        } else if (getB().isZero()) {
-            return getA();
-        } else if (getA().equals(getB())) {
-            return new Mult(new Num(2), getA());
-        } else {
-            return new Plus(getA(), getB());
-        }
+        PlusSimplifier simplifier = new PlusSimplifier();
+
+        simplifier.initBy(this);
+
+        return simplifier.simplify(this);
     }
 
     /**

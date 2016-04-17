@@ -21,6 +21,21 @@ public class Num implements Expression {
         this.value = num;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Num num = (Num) o;
+
+        return Double.compare(num.value, value) == 0;
+
+    }
+
     /**
      * returns a nice string representation of the expression.
      *
@@ -142,4 +157,6 @@ public class Num implements Expression {
     public Expression differentiate(String var) {
         return new Num(0);
     }
+
+
 }

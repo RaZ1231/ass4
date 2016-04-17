@@ -22,6 +22,21 @@ public class Var implements Expression {
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Var var = (Var) o;
+
+        return value != null ? value.equals(var.value) : var.value == null;
+
+    }
+
     /**
      * returns a nice string representation of the expression.
      *
@@ -155,4 +170,6 @@ public class Var implements Expression {
             return new Num(0);
         }
     }
+
+
 }
