@@ -1,8 +1,7 @@
-package Simplification;
+package Simplifiers;
 
 import binary.Minus;
 import operands.Num;
-import structure.BaseSimplifier;
 import unary.Neg;
 
 /**

@@ -1,4 +1,7 @@
-package structure;
+package Simplifiers;
+
+import Simplification.Rule;
+import structure.Expression;
 
 import java.util.LinkedList;
 import java.util.List;

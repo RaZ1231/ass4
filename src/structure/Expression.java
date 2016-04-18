@@ -65,27 +65,6 @@ public interface Expression {
     Expression simplify();
 
     /**
-     * checks if zero
-     *
-     * @return true\false
-     */
-    boolean isZero();
-
-    /**
-     * checks if one
-     *
-     * @return true/false
-     */
-    boolean isOne();
-
-    /**
-     * checks if even
-     *
-     * @return true/false
-     */
-    boolean isEven();
-
-    /**
      * returns the expression tree resulting from differentiating
      * the current expression relative to variable `var`.
      *

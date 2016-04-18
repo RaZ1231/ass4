@@ -1,6 +1,5 @@
-package Simplification;
+package Simplifiers;
 
-import structure.BaseSimplifier;
 import unary.Neg;
 
 /**

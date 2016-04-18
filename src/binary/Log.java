@@ -1,6 +1,6 @@
 package binary;
 
-import Simplification.LogSimplifier;
+import Simplifiers.LogSimplifier;
 import operands.Const;
 import operands.Num;
 import operands.Var;

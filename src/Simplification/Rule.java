@@ -1,4 +1,6 @@
-package structure;
+package Simplification;
+
+import structure.Expression;
 
 /**
  * @author Raziel Solomon
@@ -20,4 +22,5 @@ public class Rule {
     public Expression getSimple() {
         return simple;
     }
+
 }

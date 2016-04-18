@@ -1,6 +1,9 @@
 package binary;
 
+import operands.Num;
+import operands.Var;
 import org.junit.Test;
+import structure.Expression;
 
 import static org.junit.Assert.*;
 
@@ -47,6 +50,24 @@ public class PlusTest {
         Plus plus2 = new Plus(new Mult(1, 5), new Div("x", 1));
 
         assertFalse(plus1.equals(plus2));
+    }
+
+    @Test
+    public void assign() throws Exception {
+        Plus plus = new Plus("x", 5);
+        Expression expected = new Plus(new Plus("x", "y"), new Num(5));
+        Expression actual = plus.assign("x", new Plus("x", "y"));
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void assign2() throws Exception {
+        Plus plus = new Plus(new Plus("x", "z"), new Num(5));
+        Expression expected = new Plus(new Plus(new Plus("x", "y"), new Var("z")), new Num(5));
+        Expression actual = plus.assign("x", new Plus("x", "y"));
+
+        assertEquals(expected, actual);
     }
 
 }

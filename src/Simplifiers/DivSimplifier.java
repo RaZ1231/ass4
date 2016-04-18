@@ -1,9 +1,7 @@
-package Simplification;
+package Simplifiers;
 
 import binary.Div;
-import binary.Log;
 import operands.Num;
-import structure.BaseSimplifier;
 
 /**
  * @author Raziel Solomon

@@ -117,36 +117,6 @@ public class Num implements Expression {
     }
 
     /**
-     * checks if zero
-     *
-     * @return true\false
-     */
-    @Override
-    public boolean isZero() {
-        return getValue() == 0;
-    }
-
-    /**
-     * checks if one
-     *
-     * @return true/false
-     */
-    @Override
-    public boolean isOne() {
-        return getValue() == 1;
-    }
-
-    /**
-     * checks if even
-     *
-     * @return true/false
-     */
-    @Override
-    public boolean isEven() {
-        return getValue() % 2 == 0;
-    }
-
-    /**
      * returns the expression tree resulting from differentiating
      * the current expression relative to variable `var`.
      *

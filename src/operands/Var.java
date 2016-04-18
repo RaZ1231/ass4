@@ -126,36 +126,6 @@ public class Var implements Expression {
     }
 
     /**
-     * checks if zero
-     *
-     * @return true\false
-     */
-    @Override
-    public boolean isZero() {
-        return false;
-    }
-
-    /**
-     * checks if one
-     *
-     * @return true/false
-     */
-    @Override
-    public boolean isOne() {
-        return false;
-    }
-
-    /**
-     * checks if even
-     *
-     * @return true/false
-     */
-    @Override
-    public boolean isEven() {
-        return false;
-    }
-
-    /**
      * returns the expression tree resulting from differentiating
      * the current expression relative to variable `var`.
      *

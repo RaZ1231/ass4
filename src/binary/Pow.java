@@ -1,6 +1,6 @@
 package binary;
 
-import Simplification.PowSimplifier;
+import Simplifiers.PowSimplifier;
 import operands.Const;
 import operands.Num;
 import operands.Var;

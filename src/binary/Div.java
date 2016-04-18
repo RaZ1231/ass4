@@ -1,6 +1,6 @@
 package binary;
 
-import Simplification.DivSimplifier;
+import Simplifiers.DivSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;

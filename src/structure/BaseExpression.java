@@ -119,33 +119,6 @@ public abstract class BaseExpression {
     protected abstract double evaluateSons(Map<String, Double> assignment) throws Exception;
 
     /**
-     * checks if zero
-     *
-     * @return true\false
-     */
-    public boolean isZero() {
-        return false;
-    }
-
-    /**
-     * checks if one
-     *
-     * @return true/false
-     */
-    public boolean isOne() {
-        return false;
-    }
-
-    /**
-     * checks if even
-     *
-     * @return true/false
-     */
-    public boolean isEven() {
-        return false;
-    }
-
-    /**
      * returns the expression tree resulting from differentiating
      * the current expression relative to variable `var`.
      *
