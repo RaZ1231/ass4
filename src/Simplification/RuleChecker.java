@@ -44,7 +44,7 @@ public class RuleChecker {
             Tag tag = (Tag) rule;
 
             if (containsKey(tag.getValue())) {
-                return compare(get(tag.getValue()), expression);
+                return expression.equals(get(tag.getValue()));
             } else {
                 put(tag.getValue(), expression);
                 return true;
@@ -72,8 +72,6 @@ public class RuleChecker {
     public Expression applyRule(Rule rule) {
         Expression simple = rule.getSimple();
 
-        //return replaceTag(simple);
-
         for (Entry<String, Expression> tag : tags.entrySet()) {
             System.out.print(simple);
             simple = simple.assign(tag.getKey(), tag.getValue());
@@ -83,18 +81,4 @@ public class RuleChecker {
 
         return simple;
     }
-
-    /*
-    private Expression replaceTag(Expression expression) {
-        if (expression instanceof Tag) {
-            return get(((Tag) expression).getValue());
-        } else if (expression instanceof UnaryExpression) {
-            ((UnaryExpression) expression).setA() = replaceTag(((UnaryExpression) expression).getA());
-            return expression;
-        } else if (expression instanceof BinaryExpression) {
-            replaceTag(((BinaryExpression) expression).getA());
-            replaceTag(((BinaryExpression) expression).getB());
-        }
-    }
-    */
 }

@@ -93,7 +93,7 @@ public class Pow extends BinaryExpression implements Expression {
      */
     @Override
     public Expression create(Expression a, Expression b) {
-        return new Pow(getA(), getB());
+        return new Pow(a, b);
     }
 
     /**

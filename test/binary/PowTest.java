@@ -13,9 +13,9 @@ import structure.Expression;
 public class PowTest {
     @Test
     public void operate() throws Exception {
-        Pow pow = new Pow(2,4);
+        Pow pow = new Pow(2, 4);
 
-        double actual = pow.operate(2,4);
+        double actual = pow.operate(2, 4);
         double expected = 16;
 
         Assert.assertEquals(expected, actual, 0);
@@ -23,7 +23,7 @@ public class PowTest {
 
     @Test
     public void create() throws Exception {
-        Pow expected = new Pow(1,2);
+        Pow expected = new Pow(1, 2);
         Expression actual = expected.create(new Num(1), new Num(2));
 
         Assert.assertEquals(expected.toString(), actual.toString());
@@ -42,13 +42,11 @@ public class PowTest {
     }
 
     @Test
-    public void simple() throws Exception {
+    public void assign() throws Exception {
+        Expression expected = new Pow(new Plus("x", 1), new Var("y"));
+        Expression actual = new Pow("x", "y").assign("x", new Plus("x", 1));
 
-    }
-
-    @Test
-    public void toStringTest() throws Exception {
-
+        Assert.assertEquals(expected, actual);
     }
 
 }
