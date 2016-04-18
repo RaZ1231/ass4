@@ -1,6 +1,7 @@
 package Simplification;
 
 import binary.Div;
+import binary.Log;
 import operands.Num;
 import structure.BaseSimplifier;
 
@@ -20,5 +21,6 @@ public class DivSimplifier extends BaseSimplifier {
         add(new Div(new Num(0), expression.getB()), new Num(0));
         add(new Div(expression.getA(), new Num(1)), expression.getA());
         add(new Div(expression.getA(), expression.getA()), new Num(1));
+        //add(new Div(new Log())); Loa div Log with same base.
     }
 }

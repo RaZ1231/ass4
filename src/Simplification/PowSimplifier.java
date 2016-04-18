@@ -1,8 +1,11 @@
 package Simplification;
 
+import binary.Log;
 import binary.Pow;
 import operands.Num;
 import structure.BaseSimplifier;
+import structure.BinaryExpression;
+import structure.Expression;
 
 /**
  * @author Raziel Solomon
@@ -23,5 +26,8 @@ public class PowSimplifier extends BaseSimplifier {
         add(new Pow(new Num(1), expression.getB()), new Num(1));
         //add(new Mult(expression.getA(), new Log(expression.getA(),expression.getB().getB())), expression.getB().getB
         //        ());
+        add(new Pow(expression.getA(), new Log(expression.getA(),
+                ((BinaryExpression) expression.getB()).getB())),
+                ((BinaryExpression) expression.getB()).getB());
     }
 }

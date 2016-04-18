@@ -1,6 +1,7 @@
 package Simplification;
 
 import binary.Log;
+import binary.Pow;
 import operands.Num;
 import structure.BaseSimplifier;
 
@@ -19,5 +20,6 @@ public class LogSimplifier extends BaseSimplifier {
 
         add(new Log(expression.getA(), new Num(1)), new Num(0));
         add(new Log(expression.getA(), expression.getA()), new Num(1));
+        add(new Log(expression.getA(), new Pow(expression.getA(), null)), null);
     }
 }

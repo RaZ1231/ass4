@@ -16,7 +16,6 @@ public class NegSimplifier extends BaseSimplifier {
     public void initBy(Neg expression) {
         init();
 
-        //add(new Log(expression.getA(), new Num(1)), new Num(0));
-        //add(new Log(expression.getA(), expression.getA()), new Num(1));
+        add(new Neg(new Neg(expression.getA())), expression.getA());
     }
 }
