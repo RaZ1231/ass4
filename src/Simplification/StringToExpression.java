@@ -6,8 +6,10 @@ import binary.Minus;
 import binary.Mult;
 import binary.Plus;
 import binary.Pow;
+import java.util.Objects;
 import operands.Num;
 import operands.Var;
+import structure.BinaryExpression;
 import structure.Expression;
 import unary.Cos;
 
@@ -16,9 +18,11 @@ import unary.Cos;
  * @since 18/04/2016.
  */
 public class StringToExpression {
-    public static Expression StringToExpression(String strExp) {
-        int counter =0;
-        int maxCount = 0;
+    /*public static Expression StringToExpression(String strExp) {
+        //int counter =0;
+        int opCount = 0;
+        int clCount = 0;
+        int lastCount = 0;
         int maxIndex = 0;
         String leftSubString = "";
         String rightSubString = "";
@@ -26,10 +30,12 @@ public class StringToExpression {
         for (int i = 0; i < strExp.length() ;i++){
             switch (strExp.charAt(i)) {
                 case '(':
-                    counter++;
+                    //counter++;
+                    opCount++;
                     break;
                 case ')':
-                    counter--;
+                    //counter--;
+                    clCount++;
                     break;
                 case ' ':
                     break;
@@ -39,8 +45,10 @@ public class StringToExpression {
                             || strExp.charAt(i) == 'l' ||
                             ((strExp.charAt(i) == 's') && (strExp.charAt(i+1) == 'i'))
                             || strExp.charAt(i) == 'c' || strExp.charAt(i) == '#') {
-                        if (counter > maxCount) {
+                        //if (counter >= lastCount) {
+                         if (opCount-clCount <= 1){
                             maxIndex = i;
+                            //lastCount = counter;
                         }
                     }
                     break;
@@ -106,5 +114,65 @@ public class StringToExpression {
         } catch (Exception e) {
             return new Var(strExp);
         }
+    }*/
+
+    public static Expression StringToExpression(String str, String type) {
+        Expression l = null;
+        Expression r = null;
+        Expression p = null;
+        int count = 0;
+        int i = 0;
+        if (str.charAt(0) == '('){
+            l = StringToExpression(str.substring(1), "L");
+            for(i = 0; i < str.length(); i++){
+                if (str.charAt(i) == '('){
+                    count++;
+                }else if (str.charAt(i) == ')'){
+                    count--;
+                }
+                if (count == 0){
+                    break;
+                }
+            }
+            if (i == str.length()-1){
+                return null;
+            }
+            p = StringToExpression(str.substring(i), null);
+            //p.setA(l);///////////////////
+            return p;
+        }
+        if (type.equals("L")) {
+            for(i = 0; i < str.length(); i++){
+                if (str.charAt(i) == '+' || str.charAt(i) == '-' || str.charAt(i) == '/'
+                        || str.charAt(i) == '*' || str.charAt(i) == '^'
+                        || str.charAt(i) == 'l' || str.charAt(i) == 'c'
+                        || ((str.charAt(i) == 's') && (str.charAt(i+1) == 'i'))) {
+                    break;
+                }
+            }
+            p = StringToExpression(str.substring(i), null);
+            /////current
+            //p.setA(current);//////////////////
+            return p;
+        }
+        if (type.equals("R")) {
+            for (i = 0; i < str.length(); i++) {
+                if (str.charAt(i) == ')') {
+                    break;
+                }
+            }
+            String subS = str.substring(0, i - 1);
+            try {
+                return new Num(Double.parseDouble(subS));
+            } catch (Exception ex) {
+                return new Var(subS);
+            }
+        }
+        if (type.equals("oper")) {
+            r = StringToExpression(str.substring(1), "oper");
+            //static current.setB(r);
+            //return current;
+        }
+        return null;
     }
 }

@@ -21,7 +21,7 @@ public class StringToExpressionTest {
     public void stringToExpression() throws Exception {
         Expression expected = new Pow(new Cos("x"), new Num(2));
         String s = "((cos(x))^2)";
-        Expression actual = StringToExpression.StringToExpression(s);
+        Expression actual = StringToExpression.StringToExpression(s, "L");
 
         assertEquals(expected, actual);
     }
@@ -30,7 +30,7 @@ public class StringToExpressionTest {
     public void stringToExpression2() throws Exception {
         Expression expected = new Plus(new Pow(new Cos("x"), new Num(2)), new Mult(new Var("x"), new Log("y", "z")));
         String s = expected.toString();
-        Expression actual = StringToExpression.StringToExpression(s);
+        Expression actual = StringToExpression.StringToExpression(s, "L");
 
         assertEquals(expected, actual);
     }
