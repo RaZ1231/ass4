@@ -150,7 +150,7 @@ public class StringToExpression {
                     break;
                 }
             }
-            p = StringToExpression(str.substring(i), null);
+            p = StringToExpression(str.substring(i), "oper");
             /////current
             //p.setA(current);//////////////////
             return p;
@@ -169,7 +169,7 @@ public class StringToExpression {
             }
         }
         if (type.equals("oper")) {
-            r = StringToExpression(str.substring(1), "oper");
+            r = StringToExpression(str.substring(1), "R");
             //static current.setB(r);
             //return current;
         }
