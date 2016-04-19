@@ -1,5 +1,7 @@
 package Simplification;
 
+import binary.Log;
+import binary.Mult;
 import binary.Plus;
 import binary.Pow;
 import operands.Num;
@@ -7,7 +9,8 @@ import operands.Var;
 import org.junit.Test;
 import structure.Expression;
 import unary.Cos;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Elisheva Broyer.
@@ -20,7 +23,15 @@ public class StringToExpressionTest {
         String s = "((cos(x))^2)";
         Expression actual = StringToExpression.StringToExpression(s);
 
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
+    @Test
+    public void stringToExpression2() throws Exception {
+        Expression expected = new Plus(new Pow(new Cos("x"), new Num(2)), new Mult(new Var("x"), new Log("y", "z")));
+        String s = expected.toString();
+        Expression actual = StringToExpression.StringToExpression(s);
+
+        assertEquals(expected, actual);
+    }
 }

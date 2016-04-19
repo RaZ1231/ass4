@@ -22,7 +22,7 @@ public class RuleCheckerTest {
         Rule rule = new Rule(complicated, simple);
         RuleChecker checker = new RuleChecker();
 
-        assertTrue(checker.check(rule, expression));
+        assertTrue(checker.check(rule.getComplicated(), expression));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class RuleCheckerTest {
         Rule rule = new Rule(complicated, simple);
         RuleChecker checker = new RuleChecker();
 
-        assertTrue(checker.check(rule, expression));
+        assertTrue(checker.check(rule.getComplicated(), expression));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class RuleCheckerTest {
         Rule rule = new Rule(complicated, simple);
         RuleChecker checker = new RuleChecker();
 
-        assertFalse(checker.check(rule, expression));
+        assertFalse(checker.check(rule.getComplicated(), expression));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class RuleCheckerTest {
         Rule rule = new Rule(complicated, simple);
         RuleChecker checker = new RuleChecker();
 
-        assertFalse(checker.check(rule, expression));
+        assertFalse(checker.check(rule.getComplicated(), expression));
     }
 
     @Test
@@ -69,10 +69,9 @@ public class RuleCheckerTest {
         Rule rule = new Rule(complicated, simple);
         Expression expression = new Pow(new Var("x"), new Log(new Var("x"), new Num(5)));
         RuleChecker checker = new RuleChecker();
-        checker.check(rule, expression);
 
         Expression expected = new Num(5);
-        Expression actual = checker.applyRule(rule);
+        Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
     }
@@ -82,10 +81,9 @@ public class RuleCheckerTest {
         Expression expression = new Mult("x", 2);
         Rule rule = new Rule(new Mult(new Tag("1"), new Num(2)), new Mult(new Num(2), new Tag("1")));
         RuleChecker checker = new RuleChecker();
-        checker.check(rule, expression);
 
         Expression expected = new Mult(2, "x");
-        Expression actual = checker.applyRule(rule);
+        Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
     }
@@ -95,10 +93,9 @@ public class RuleCheckerTest {
         Expression expression = new Mult(new Var("x"), new Plus("x", 2));
         Rule rule = new Rule(new Mult(new Tag("1"), new Tag("2")), new Mult(new Tag("2"), new Tag("1")));
         RuleChecker checker = new RuleChecker();
-        checker.check(rule, expression);
 
         Expression expected = new Mult(new Plus("x", 2), new Var("x"));
-        Expression actual = checker.applyRule(rule);
+        Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
     }
@@ -109,10 +106,9 @@ public class RuleCheckerTest {
         Rule rule = new Rule(new Log(new Tag("1"), new Div(new Tag("2"), new Tag("3"))),
                 new Minus(new Log(new Tag("1"), new Tag("2")), new Log(new Tag("1"), new Tag("3"))));
         RuleChecker checker = new RuleChecker();
-        checker.check(rule, expression);
 
         Expression expected = new Minus(new Log(new Num(5), new Mult("x", 2)), new Log(new Num(5), new Pow("x", 2)));
-        Expression actual = checker.applyRule(rule);
+        Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
     }
@@ -123,24 +119,35 @@ public class RuleCheckerTest {
         Rule rule = new Rule(new Pow(new Pow(new Tag("1"), new Tag("2")), new Tag("3")),
                 new Pow(new Tag("1"), new Mult(new Tag("2"), new Tag("3"))));
         RuleChecker checker = new RuleChecker();
-        checker.check(rule, expression);
 
         Expression expected = new Pow(new Var("x"), new Mult(2, 3));
-        Expression actual = checker.applyRule(rule);
+        Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void applyRuleComplicated() throws Exception {
+    public void applyRule6() throws Exception {
         Expression expression = new Pow(new Pow(new Plus("x", 5), new Mult("x", "y")), new Var("z"));
         Rule rule = new Rule(new Pow(new Pow(new Tag("1"), new Tag("2")), new Tag("3")),
                 new Pow(new Tag("1"), new Mult(new Tag("2"), new Tag("3"))));
         RuleChecker checker = new RuleChecker();
-        checker.check(rule, expression);
 
         Expression expected = new Pow(new Plus("x", 5), new Mult(new Mult("x", "y"), new Var("z")));
-        Expression actual = checker.applyRule(rule);
+        Expression actual = checker.apply(rule, expression);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void applyRule7() throws Exception {
+        Expression expression = new Mult(new Pow("x", 2), new Plus(3, 4));
+        Rule rule = new Rule(new Mult(new Tag("1"), new NumTag("2")),
+                new Mult(new NumTag("2"), new Tag("1")));
+        RuleChecker checker = new RuleChecker();
+
+        Expression expected = new Mult(new Num(7), new Pow("x", 2));
+        Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
     }

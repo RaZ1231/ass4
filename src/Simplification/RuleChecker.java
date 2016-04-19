@@ -1,5 +1,6 @@
 package Simplification;
 
+import operands.Num;
 import structure.BinaryExpression;
 import structure.Expression;
 import structure.UnaryExpression;
@@ -35,12 +36,21 @@ public class RuleChecker {
         tags.clear();
     }
 
-    public boolean check(Rule rule, Expression expression) {
-        return compare(rule.getComplicated(), expression);
+    protected boolean check(Expression complicated, Expression expression) {
+        return compare(complicated, expression);
     }
 
     private boolean compare(Expression rule, Expression expression) {
-        if (rule instanceof Tag) {
+        if (rule instanceof NumTag) {
+            NumTag tag = (NumTag) rule;
+
+            try {
+                put(tag.getValue(), new Num(expression.evaluate()));
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        } else if (rule instanceof Tag) {
             Tag tag = (Tag) rule;
 
             if (containsKey(tag.getValue())) {
@@ -69,16 +79,21 @@ public class RuleChecker {
         }
     }
 
-    public Expression applyRule(Rule rule) {
-        Expression simple = rule.getSimple();
-
+    private Expression applyRule(Expression simple) {
         for (Entry<String, Expression> tag : tags.entrySet()) {
-            System.out.print(simple);
             simple = simple.assign(tag.getKey(), tag.getValue());
-            System.out.print(" --[#" + tag.getKey() + "->" + tag.getValue() + "]--> ");
-            System.out.println(simple);
         }
 
         return simple;
+    }
+
+    public Expression apply(Rule rule, Expression expression) throws Exception {
+        init();
+
+        if (check(rule.getComplicated(), expression)) {
+            return applyRule(rule.getSimple());
+        } else {
+            throw new Exception("Expression does not meet rule criteria.");
+        }
     }
 }
