@@ -16,8 +16,8 @@ import static org.junit.Assert.*;
 public class StringToExpressionTest {
     @Test
     public void stringToExpression() throws Exception {
-        Expression expected = new Pow(new Plus("x", 4), new Num(2));
-        String s = "(x + 4)^2)";
+        Expression expected = new Pow(new Cos("x"), new Num(2));
+        String s = "((cos(x))^2)";
         Expression actual = StringToExpression.StringToExpression(s);
 
         assertEquals(expected,actual);

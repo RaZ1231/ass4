@@ -46,9 +46,15 @@ public class StringToExpression {
                     break;
             }
         }
-        if (maxIndex>0) {
-            leftSubString = strExp.substring(0, maxIndex-1);
-            rightSubString = strExp.substring(maxIndex+2, strExp.length());
+        if ((maxIndex>0) && strExp.charAt(maxIndex) !='c' && strExp.charAt(maxIndex) !='s') {
+            if (strExp.charAt(maxIndex) == '^'){
+                leftSubString = strExp.substring(1, maxIndex);
+                rightSubString = strExp.substring(maxIndex+1, strExp.length()-1);
+            } else {
+                leftSubString = strExp.substring(1, maxIndex-1);
+                rightSubString = strExp.substring(maxIndex+2, strExp.length()-1);
+            }
+
         }
         switch (strExp.charAt(maxIndex)) {
             case '+':
@@ -96,24 +102,9 @@ public class StringToExpression {
                 return new Tag(sub);
         }
         try{
-            return new Num(Double.parseDouble(parenthesisRemove(strExp)));
+            return new Num(Double.parseDouble(strExp));
         } catch (Exception e) {
-            return new Var(parenthesisRemove(strExp));
+            return new Var(strExp);
         }
-    }
-
-    private static String parenthesisRemove(String str){
-        int index = 0;
-
-        for(int i = 0; i< str.length(); i++) {
-            if (str.charAt(i) != '('){
-                index = i;
-                break;
-            }
-        }
-        if (index == str.length()-1){
-            return  str.substring(index, str.length());
-        }
-        return str.substring(index, str.length()-1);
     }
 }
