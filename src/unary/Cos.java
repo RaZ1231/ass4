@@ -7,6 +7,8 @@ import structure.Expression;
 import structure.UnaryExpression;
 
 /**
+ * cos class representation.
+ *
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
@@ -21,7 +23,7 @@ public class Cos extends UnaryExpression implements Expression {
     }
 
     /**
-     * constructor..
+     * constructor.
      *
      * @param a an expression.
      */
@@ -72,9 +74,9 @@ public class Cos extends UnaryExpression implements Expression {
     }
 
     /**
-     * Returned a simplified version of the current expression.
+     * returned a simplified version of the current expression.
      *
-     * @return simplified expression
+     * @return simplified expression.
      */
     @Override
     public Expression simple() {

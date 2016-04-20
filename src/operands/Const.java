@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * constant representation class.
+ *
  * @author Raziel Solomon
  * @since 13-Apr-16.
  */
@@ -24,6 +26,12 @@ public class Const implements Expression {
         this.value = value;
     }
 
+    /**
+     * returns true if equals, false otherwise.
+     *
+     * @param o an object.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -139,6 +147,4 @@ public class Const implements Expression {
     public Expression differentiate(String var) {
         return new Num(0);
     }
-
-
 }

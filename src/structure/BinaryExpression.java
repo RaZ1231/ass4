@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * binary expression class representation.
+ *
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
@@ -24,7 +26,7 @@ public abstract class BinaryExpression extends BaseExpression {
     }
 
     /**
-     * Evaluates sons of expression
+     * evaluates sons of expression.
      *
      * @param assignment variables' values to assign
      * @return equation solution for the assignment
@@ -45,27 +47,27 @@ public abstract class BinaryExpression extends BaseExpression {
     protected abstract double operate(double a, double b);
 
     /**
-     * Get left son
+     * get left son.
      *
-     * @return left son
+     * @return left son.
      */
     public Expression getA() {
         return a;
     }
 
     /**
-     * Get right son
+     * get right son.
      *
-     * @return right son
+     * @return right son.
      */
     public Expression getB() {
         return b;
     }
 
     /**
-     * get variables of sons
+     * get variables of sons.
      *
-     * @return list containing the variables in the expression
+     * @return list containing the variables in the expression.
      */
     @Override
     protected List<String> getVariablesSons() {
@@ -78,11 +80,11 @@ public abstract class BinaryExpression extends BaseExpression {
     }
 
     /**
-     * Return assignment of sons
+     * return assignment of sons.
      *
      * @param var        variable to replace.
      * @param expression expression to put instead.
-     * @return modified sons
+     * @return modified sons.
      */
     @Override
     protected Expression assignSons(String var, Expression expression) {
@@ -99,9 +101,9 @@ public abstract class BinaryExpression extends BaseExpression {
     protected abstract Expression create(Expression a, Expression b);
 
     /**
-     * Simplifies sons of base expression
+     * Simplifies sons of base expression.
      *
-     * @return base expression with simplified sons
+     * @return base expression with simplified sons.
      */
     @Override
     protected BaseExpression simplifySons() {
@@ -116,6 +118,12 @@ public abstract class BinaryExpression extends BaseExpression {
      */
     public abstract Expression derivative(String var);
 
+    /**
+     * returns true if equals, false otherwise.
+     *
+     * @param o an object.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -128,6 +136,5 @@ public abstract class BinaryExpression extends BaseExpression {
         BinaryExpression that = (BinaryExpression) o;
 
         return (a != null ? a.equals(that.a) : that.a == null) && (b != null ? b.equals(that.b) : that.b == null);
-
     }
 }

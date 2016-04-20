@@ -7,6 +7,8 @@ import structure.BinaryExpression;
 import structure.Expression;
 
 /**
+ * Multiple representation class.
+ *
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */

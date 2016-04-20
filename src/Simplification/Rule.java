@@ -13,10 +13,10 @@ public class Rule {
     private Expression simple;
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param complicated complicated form
-     * @param simple      simple form
+     * @param complicated complicated form.
+     * @param simple      simple form.
      */
     public Rule(Expression complicated, Expression simple) {
         this.complicated = complicated;
@@ -24,10 +24,10 @@ public class Rule {
     }
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param complicated complicated form
-     * @param simple      simple form
+     * @param complicated complicated form.
+     * @param simple      simple form.
      */
     public Rule(String complicated, String simple) {
         StringToExpression ste = new StringToExpression();
@@ -37,21 +37,20 @@ public class Rule {
     }
 
     /**
-     * get complicated
+     * get complicated.
      *
-     * @return complicated form
+     * @return complicated form.
      */
     public Expression getComplicated() {
         return complicated;
     }
 
     /**
-     * get simple
+     * get simple.
      *
-     * @return simple form
+     * @return simple form.
      */
     public Expression getSimple() {
         return simple;
     }
-
 }

@@ -11,10 +11,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
+ * Testing assignment.
+ *
  * @author Raziel Solomon
  * @since 14-Apr-16.
  */
 public class ExpressionsTest {
+    /**
+     * main method.
+     *
+     * @param args data from user.
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         Expression expression = new Plus(
                 new Mult(2, "x"),

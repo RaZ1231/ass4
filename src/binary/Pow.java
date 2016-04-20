@@ -8,6 +8,8 @@ import structure.BinaryExpression;
 import structure.Expression;
 
 /**
+ * Pow representation class.
+ *
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */

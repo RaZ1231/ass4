@@ -28,8 +28,8 @@ public class RuleChecker {
     /**
      * put tag in map.
      *
-     * @param tag        tag to add
-     * @param expression expression to add
+     * @param tag        tag to add.
+     * @param expression expression to add.
      */
     private void put(String tag, Expression expression) {
         tags.put(tag, expression);
@@ -38,8 +38,8 @@ public class RuleChecker {
     /**
      * get expression by tag.
      *
-     * @param tag the tag to get by
-     * @return expression
+     * @param tag the tag to get by.
+     * @return expression.
      */
     private Expression get(String tag) {
         return containsKey(tag) ? tags.get(tag) : null;
@@ -48,15 +48,15 @@ public class RuleChecker {
     /**
      * check if contain tag.
      *
-     * @param tag tag to check
-     * @return true/false
+     * @param tag tag to check.
+     * @return true/false.
      */
     private boolean containsKey(String tag) {
         return tags.containsKey(tag);
     }
 
     /**
-     * initialize  map
+     * initialize  map.
      */
     public void init() {
         tags.clear();
@@ -65,20 +65,20 @@ public class RuleChecker {
     /**
      * checks if expression meets criteria.
      *
-     * @param complicated compare to
-     * @param expression  expression to check
-     * @return true/false
+     * @param complicated compare to.
+     * @param expression  expression to check.
+     * @return true/false.
      */
     protected boolean check(Expression complicated, Expression expression) {
         return compare(complicated, expression);
     }
 
     /**
-     * compare two expressions
+     * compare two expressions.
      *
-     * @param rule       first
-     * @param expression second
-     * @return true/false
+     * @param rule       first.
+     * @param expression second.
+     * @return true/false.
      */
     private boolean compare(Expression rule, Expression expression) {
         if (rule instanceof NumTag) { //NumTag
@@ -120,10 +120,10 @@ public class RuleChecker {
     }
 
     /**
-     * replace tags in simple with expression's
+     * replace tags in simple with expression's.
      *
-     * @param simple simple form of rule
-     * @return simple expression
+     * @param simple simple form of rule.
+     * @return simple expression.
      */
     private Expression applyRule(Expression simple) {
         for (Entry<String, Expression> tag : tags.entrySet()) {
@@ -134,11 +134,11 @@ public class RuleChecker {
     }
 
     /**
-     * checks and apply rule
+     * checks and apply rule.
      *
-     * @param rule       rule to apply
-     * @param expression expression to check
-     * @return simple expression
+     * @param rule       rule to apply.
+     * @param expression expression to check.
+     * @return simple expression.
      * @throws Exception
      */
     public Expression apply(Rule rule, Expression expression) throws Exception {
@@ -152,10 +152,10 @@ public class RuleChecker {
     }
 
     /**
-     * checks expression against Rules list
+     * checks expression against Rules list.
      *
-     * @param expression expression to check
-     * @return simple expression
+     * @param expression expression to check.
+     * @return simple expression.
      */
     public Expression applyRules(Expression expression) {
         int i = 0;

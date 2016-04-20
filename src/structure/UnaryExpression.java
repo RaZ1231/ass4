@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * unary expression class representation.
+ *
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
@@ -21,10 +23,10 @@ public abstract class UnaryExpression extends BaseExpression {
     }
 
     /**
-     * Evaluates sons of expression
+     * evaluates sons of expression.
      *
-     * @param assignment variables' values to assign
-     * @return equation solution for the assignment
+     * @param assignment variables' values to assign.
+     * @return equation solution for the assignment.
      * @throws Exception
      */
     @Override
@@ -41,18 +43,18 @@ public abstract class UnaryExpression extends BaseExpression {
     protected abstract double operate(double a);
 
     /**
-     * Get left son
+     * get left son.
      *
-     * @return left son
+     * @return left son.
      */
     public Expression getA() {
         return a;
     }
 
     /**
-     * get variables of sons
+     * get variables of sons.
      *
-     * @return list containing the variables in the expression
+     * @return list containing the variables in the expression.
      */
     @Override
     protected List<String> getVariablesSons() {
@@ -64,7 +66,7 @@ public abstract class UnaryExpression extends BaseExpression {
     }
 
     /**
-     * Return assignment of sons
+     * return assignment of sons.
      *
      * @param var        variable to replace.
      * @param expression expression to put instead.
@@ -84,9 +86,9 @@ public abstract class UnaryExpression extends BaseExpression {
     protected abstract Expression create(Expression a);
 
     /**
-     * Simplifies sons of base expression
+     * simplifies sons of base expression.
      *
-     * @return base expression with simplified sons
+     * @return base expression with simplified sons.
      */
     @Override
     protected BaseExpression simplifySons() {
@@ -101,6 +103,12 @@ public abstract class UnaryExpression extends BaseExpression {
      */
     public abstract Expression derivative(String var);
 
+    /**
+     * returns true if equals, false otherwise.
+     *
+     * @param o an object.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -113,6 +121,5 @@ public abstract class UnaryExpression extends BaseExpression {
         UnaryExpression that = (UnaryExpression) o;
 
         return a != null ? a.equals(that.a) : that.a == null;
-
     }
 }

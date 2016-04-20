@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * number representation class.
+ *
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
@@ -21,6 +23,12 @@ public class Num implements Expression {
         this.value = num;
     }
 
+    /**
+     * returns true if equals, false otherwise.
+     *
+     * @param o an object.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -127,6 +135,4 @@ public class Num implements Expression {
     public Expression differentiate(String var) {
         return new Num(0);
     }
-
-
 }

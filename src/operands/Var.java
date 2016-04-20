@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * variance representation class.
+ *
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
@@ -22,6 +24,12 @@ public class Var implements Expression {
         this.value = value;
     }
 
+    /**
+     * returns true if equals, false otherwise.
+     *
+     * @param o an object.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -34,7 +42,6 @@ public class Var implements Expression {
         Var var = (Var) o;
 
         return value != null ? value.equals(var.value) : var.value == null;
-
     }
 
     /**
@@ -140,6 +147,4 @@ public class Var implements Expression {
             return new Num(0);
         }
     }
-
-
 }

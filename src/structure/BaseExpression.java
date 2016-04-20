@@ -1,17 +1,15 @@
 package structure;
 
-/**
- * @author Raziel Solomon
- * @since 11-Apr-16.
- */
-
 import operands.Num;
 
 import java.util.List;
 import java.util.Map;
 
 /**
+ * base expression class representation.
  *
+ * @author Raziel Solomon
+ * @since 11-Apr-16.
  */
 public abstract class BaseExpression {
     /**
@@ -24,9 +22,9 @@ public abstract class BaseExpression {
     }
 
     /**
-     * get variables of sons
+     * get variables of sons.
      *
-     * @return list containing the variables in the expression
+     * @return list containing the variables in the expression.
      */
     protected abstract List<String> getVariablesSons();
 
@@ -44,18 +42,18 @@ public abstract class BaseExpression {
     }
 
     /**
-     * Return assignment of sons
+     * Return assignment of sons.
      *
      * @param var        variable to replace.
      * @param expression expression to put instead.
-     * @return modified sons
+     * @return modified sons.
      */
     protected abstract Expression assignSons(String var, Expression expression);
 
     /**
      * Returned a simplified version of the current expression.
      *
-     * @return simplified expression
+     * @return simplified expression.
      */
     public Expression simplify() {
         try {
@@ -74,7 +72,7 @@ public abstract class BaseExpression {
      * a convenience method. Similar to `evaluate(assignment)` method above,
      * but uses an empty assignment.
      *
-     * @return equation solution
+     * @return equation solution.
      * @throws Exception
      */
     public double evaluate() throws Exception {
@@ -82,9 +80,9 @@ public abstract class BaseExpression {
     }
 
     /**
-     * Simplify me
+     * Simplify me.
      *
-     * @return simplified expression
+     * @return simplified expression.
      */
     protected abstract Expression simple();
 
@@ -101,8 +99,8 @@ public abstract class BaseExpression {
      * contains a variable which is not in the assignment, an exception
      * is thrown.
      *
-     * @param assignment variables' values to assign
-     * @return equation solution for the assignment
+     * @param assignment variables' values to assign.
+     * @return equation solution for the assignment.
      * @throws Exception
      */
     public double evaluate(Map<String, Double> assignment) throws Exception {
@@ -110,10 +108,10 @@ public abstract class BaseExpression {
     }
 
     /**
-     * Evaluates sons of expression
+     * Evaluates sons of expression.
      *
-     * @param assignment variables' values to assign
-     * @return equation solution for the assignment
+     * @param assignment variables' values to assign.
+     * @return equation solution for the assignment.
      * @throws Exception
      */
     protected abstract double evaluateSons(Map<String, Double> assignment) throws Exception;

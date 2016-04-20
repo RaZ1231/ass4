@@ -18,8 +18,8 @@ public class StringToExpression {
     /**
      * Converts String to Expression.
      *
-     * @param s string to convert
-     * @return expression
+     * @param s string to convert.
+     * @return expression.
      */
     public Expression toExpression(String s) {
         try {
@@ -33,16 +33,14 @@ public class StringToExpression {
                 return getExpression(s, getExternalOperand(s));
             }
         }
-
-
     }
 
     /**
      * Converts Substring to Expression.
      *
-     * @param s    string to convert
-     * @param from from index
-     * @return expression
+     * @param s    string to convert.
+     * @param from from index.
+     * @return expression.
      */
     private Expression toExpression(String s, int from) {
         return toExpression(s.substring(from));
@@ -51,20 +49,20 @@ public class StringToExpression {
     /**
      * Converts String to Expression.
      *
-     * @param s    string to convert
-     * @param from from index
-     * @param to   to index
-     * @return expression
+     * @param s    string to convert.
+     * @param from from index.
+     * @param to   to index.
+     * @return expression.
      */
     private Expression toExpression(String s, int from, int to) {
         return toExpression(s.substring(from, to));
     }
 
     /**
-     * search for next external operator
+     * search for next external operator.
      *
-     * @param s string to search in
-     * @return index of operator
+     * @param s string to search in.
+     * @return index of operator.
      */
     private Integer getExternalOperand(String s) {
         int brackets = 0;
@@ -101,11 +99,11 @@ public class StringToExpression {
     }
 
     /**
-     * create new expression for index
+     * create new expression for index.
      *
-     * @param s     string to operate on
-     * @param index external operator
-     * @return expression on toExpression(string)
+     * @param s     string to operate on.
+     * @param index external operator.
+     * @return expression on toExpression(string).
      */
     private Expression getExpression(String s, int index) {
         switch (s.charAt(index)) {

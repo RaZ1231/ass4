@@ -11,18 +11,18 @@ import structure.Expression;
  */
 public class Tag extends Var implements Expression {
     /**
-     * constructor
+     * constructor.
      *
-     * @param value tag
+     * @param value tag.
      */
     public Tag(String value) {
         super(value);
     }
 
     /**
-     * returns string representation
+     * returns string representation.
      *
-     * @return string
+     * @return string.
      */
     @Override
     public String toString() {

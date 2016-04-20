@@ -56,4 +56,15 @@ public class StringToExpressionTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void toExpression5() throws Exception {
+        StringToExpression ste = new StringToExpression();
+        Expression expected = new Div(new Pow(new Tag("1"), new Tag("2")), new Pow(new Tag("1"), new Tag
+                ("3")));
+        String s = expected.toString();
+        Expression actual = ste.toExpression(s);
+//(#1^#2) / (#1^#3)
+        assertEquals(expected, actual);
+    }
 }
