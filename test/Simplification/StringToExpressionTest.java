@@ -1,14 +1,13 @@
 package Simplification;
 
-import binary.Log;
-import binary.Mult;
-import binary.Plus;
-import binary.Pow;
+import binary.*;
 import operands.Num;
 import operands.Var;
 import org.junit.Test;
 import structure.Expression;
 import unary.Cos;
+import unary.Neg;
+import unary.Sin;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,19 +17,42 @@ import static org.junit.Assert.assertEquals;
  */
 public class StringToExpressionTest {
     @Test
-    public void stringToExpression() throws Exception {
+    public void toExpression() throws Exception {
+        StringToExpression ste = new StringToExpression();
         Expression expected = new Pow(new Cos("x"), new Num(2));
-        String s = "((cos(x))^2)";
-        Expression actual = StringToExpression.StringToExpression(s, "L");
+        String s = expected.toString();
+        Expression actual = ste.toExpression(s);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void stringToExpression2() throws Exception {
+    public void toExpression2() throws Exception {
+        StringToExpression ste = new StringToExpression();
         Expression expected = new Plus(new Pow(new Cos("x"), new Num(2)), new Mult(new Var("x"), new Log("y", "z")));
         String s = expected.toString();
-        Expression actual = StringToExpression.StringToExpression(s, "L");
+        Expression actual = ste.toExpression(s);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void toExpression3() throws Exception {
+        StringToExpression ste = new StringToExpression();
+        Expression expected = new Plus(new Pow(new Cos("x"), new Sin(new Tag("1"))), new Mult(new Var("x"),
+                new Log(new NumTag("2"), new Minus(new Neg("x"), new Div("o", "s")))));
+        String s = expected.toString();
+        Expression actual = ste.toExpression(s);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void toExpression4() throws Exception {
+        StringToExpression ste = new StringToExpression();
+        Expression expected = new Var("x");
+        String s = expected.toString();
+        Expression actual = ste.toExpression(s);
 
         assertEquals(expected, actual);
     }

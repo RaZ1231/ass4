@@ -96,4 +96,19 @@ public class RuleChecker {
             throw new Exception("Expression does not meet rule criteria.");
         }
     }
+
+    public Expression applyRules(Expression expression) {
+        int i = 0;
+
+        while (i < Rules.RULES.size()) {
+            try {
+                expression = apply(Rules.RULES.get(i), expression);
+                i = 0;
+            } catch (Exception e) {
+                i++;
+            }
+        }
+
+        return expression;
+    }
 }

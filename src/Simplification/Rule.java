@@ -15,6 +15,13 @@ public class Rule {
         this.simple = simple;
     }
 
+    public Rule(String complicated, String simple) {
+        StringToExpression ste = new StringToExpression();
+
+        this.complicated = ste.toExpression(complicated);
+        this.simple = ste.toExpression(simple);
+    }
+
     public Expression getComplicated() {
         return complicated;
     }

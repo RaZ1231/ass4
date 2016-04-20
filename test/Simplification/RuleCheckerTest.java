@@ -63,7 +63,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule() throws Exception {
+    public void apply() throws Exception {
         Expression complicated = new Pow(new Tag("1"), new Log(new Tag("1"), new Tag("2")));
         Expression simple = new Tag("2");
         Rule rule = new Rule(complicated, simple);
@@ -77,7 +77,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule2() throws Exception {
+    public void apply2() throws Exception {
         Expression expression = new Mult("x", 2);
         Rule rule = new Rule(new Mult(new Tag("1"), new Num(2)), new Mult(new Num(2), new Tag("1")));
         RuleChecker checker = new RuleChecker();
@@ -89,7 +89,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule3() throws Exception {
+    public void apply3() throws Exception {
         Expression expression = new Mult(new Var("x"), new Plus("x", 2));
         Rule rule = new Rule(new Mult(new Tag("1"), new Tag("2")), new Mult(new Tag("2"), new Tag("1")));
         RuleChecker checker = new RuleChecker();
@@ -101,7 +101,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule4() throws Exception {
+    public void apply4() throws Exception {
         Expression expression = new Log(new Num(5), new Div(new Mult("x", 2), new Pow("x", 2)));
         Rule rule = new Rule(new Log(new Tag("1"), new Div(new Tag("2"), new Tag("3"))),
                 new Minus(new Log(new Tag("1"), new Tag("2")), new Log(new Tag("1"), new Tag("3"))));
@@ -114,7 +114,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule5() throws Exception {
+    public void apply5() throws Exception {
         Expression expression = new Pow(new Pow("x", 2), new Num(3));
         Rule rule = new Rule(new Pow(new Pow(new Tag("1"), new Tag("2")), new Tag("3")),
                 new Pow(new Tag("1"), new Mult(new Tag("2"), new Tag("3"))));
@@ -127,7 +127,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule6() throws Exception {
+    public void apply6() throws Exception {
         Expression expression = new Pow(new Pow(new Plus("x", 5), new Mult("x", "y")), new Var("z"));
         Rule rule = new Rule(new Pow(new Pow(new Tag("1"), new Tag("2")), new Tag("3")),
                 new Pow(new Tag("1"), new Mult(new Tag("2"), new Tag("3"))));
@@ -140,7 +140,7 @@ public class RuleCheckerTest {
     }
 
     @Test
-    public void applyRule7() throws Exception {
+    public void apply7() throws Exception {
         Expression expression = new Mult(new Pow("x", 2), new Plus(3, 4));
         Rule rule = new Rule(new Mult(new Tag("1"), new NumTag("2")),
                 new Mult(new NumTag("2"), new Tag("1")));
@@ -150,5 +150,14 @@ public class RuleCheckerTest {
         Expression actual = checker.apply(rule, expression);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void applyRules() {
+        Expression expression = new Plus("x", 0);
+        RuleChecker checker = new RuleChecker();
+
+        Expression expected = new Var("x");
+        Expression actual = checker.applyRules(expression);
     }
 }
