@@ -9,10 +9,18 @@ import unary.Neg;
 import unary.Sin;
 
 /**
+ * Converts String to Expression.
+ *
  * @author Elisheva Broyer.
  * @since 18/04/2016.
  */
 public class StringToExpression {
+    /**
+     * Converts String to Expression.
+     *
+     * @param s string to convert
+     * @return expression
+     */
     public Expression toExpression(String s) {
         try {
             return new Num(Double.parseDouble(s));
@@ -29,14 +37,35 @@ public class StringToExpression {
 
     }
 
+    /**
+     * Converts Substring to Expression.
+     *
+     * @param s    string to convert
+     * @param from from index
+     * @return expression
+     */
     private Expression toExpression(String s, int from) {
         return toExpression(s.substring(from));
     }
 
+    /**
+     * Converts String to Expression.
+     *
+     * @param s    string to convert
+     * @param from from index
+     * @param to   to index
+     * @return expression
+     */
     private Expression toExpression(String s, int from, int to) {
         return toExpression(s.substring(from, to));
     }
 
+    /**
+     * search for next external operator
+     *
+     * @param s string to search in
+     * @return index of operator
+     */
     private Integer getExternalOperand(String s) {
         int brackets = 0;
         int minBrackets = s.length();
@@ -51,7 +80,7 @@ public class StringToExpression {
                     brackets -= 1;
                     break;
                 case '-':
-                    if (s.charAt(i + 1) != ' ') {
+                    if (s.charAt(i + 1) != ' ') { //Neg
                         break;
                     }
                 case ',':
@@ -71,6 +100,13 @@ public class StringToExpression {
         return minIndex;
     }
 
+    /**
+     * create new expression for index
+     *
+     * @param s     string to operate on
+     * @param index external operator
+     * @return expression on toExpression(string)
+     */
     private Expression getExpression(String s, int index) {
         switch (s.charAt(index)) {
             case 'c':
@@ -83,10 +119,10 @@ public class StringToExpression {
                     return new Sin(toExpression(s, 4, s.length() - 1));
                 }
                 break;
-            case '-':
+            case '-': //Neg
                 if (index == 1) {
                     return new Neg(toExpression(s, 2, s.length() - 1));
-                } else {
+                } else { //Minus
                     return new Minus(toExpression(s, 1, index - 1),
                             toExpression(s, index + 2, s.length() - 1));
                 }
