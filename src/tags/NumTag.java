@@ -1,5 +1,6 @@
-package Simplification;
+package tags;
 
+import operands.Var;
 import structure.Expression;
 
 /**
@@ -8,7 +9,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 19-Apr-16.
  */
-public class NumTag extends Tag implements Expression {
+public class NumTag extends Var implements Expression, Tag {
     /**
      * constructor
      *
@@ -26,5 +27,15 @@ public class NumTag extends Tag implements Expression {
     @Override
     public String toString() {
         return "@" + getValue();
+    }
+
+    @Override
+    public boolean check(Expression expression) {
+        try {
+            expression.evaluate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

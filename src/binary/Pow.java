@@ -1,6 +1,5 @@
 package binary;
 
-import Simplifiers.PowSimplifier;
 import operands.Const;
 import operands.Num;
 import operands.Var;
@@ -112,20 +111,6 @@ public class Pow extends BinaryExpression implements Expression {
                                 new Div(getB(), getA())),
                         new Mult(getB().differentiate(var),
                                 new Log(new Const("e", Math.exp(1)), getA()))));
-    }
-
-    /**
-     * Returned a simplified version of the current expression.
-     *
-     * @return simplified expression
-     */
-    @Override
-    public Expression simple() {
-        PowSimplifier simplifier = new PowSimplifier();
-
-        simplifier.initBy(this);
-
-        return simplifier.simplify(this);
     }
 
     /**

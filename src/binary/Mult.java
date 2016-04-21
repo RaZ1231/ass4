@@ -1,6 +1,5 @@
 package binary;
 
-import Simplifiers.MultSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -97,20 +96,6 @@ public class Mult extends BinaryExpression implements Expression {
     public Expression derivative(String var) {
         return new Plus(new Mult(getA().differentiate(var), getB()),
                 new Mult(getA(), getB().differentiate(var)));
-    }
-
-    /**
-     * Returned a simplified version of the current expression.
-     *
-     * @return simplified expression
-     */
-    @Override
-    public Expression simple() {
-        MultSimplifier simplifier = new MultSimplifier();
-
-        simplifier.initBy(this);
-
-        return simplifier.simplify(this);
     }
 
     /**

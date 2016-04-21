@@ -1,4 +1,4 @@
-package Simplification;
+package simplification;
 
 import structure.Expression;
 
@@ -30,7 +30,7 @@ public class Rule {
      * @param simple      simple form.
      */
     public Rule(String complicated, String simple) {
-        StringToExpression ste = new StringToExpression();
+        Parser ste = new Parser();
 
         this.complicated = ste.toExpression(complicated);
         this.simple = ste.toExpression(simple);

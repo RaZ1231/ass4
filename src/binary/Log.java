@@ -1,6 +1,5 @@
 package binary;
 
-import Simplifiers.LogSimplifier;
 import operands.Const;
 import operands.Num;
 import operands.Var;
@@ -100,20 +99,6 @@ public class Log extends BinaryExpression implements Expression {
                 new Div(
                         new Num(1), new Mult(getB(), new Log(new Const("e", Math.exp(1)), getA()))),
                 getB().differentiate(var));
-    }
-
-    /**
-     * Returned a simplified version of the current expression.
-     *
-     * @return simplified expression
-     */
-    @Override
-    public Expression simple() {
-        LogSimplifier simplifier = new LogSimplifier();
-
-        simplifier.initBy(this);
-
-        return simplifier.simplify(this);
     }
 
     /**

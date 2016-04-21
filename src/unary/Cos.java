@@ -74,16 +74,6 @@ public class Cos extends UnaryExpression implements Expression {
     }
 
     /**
-     * returned a simplified version of the current expression.
-     *
-     * @return simplified expression.
-     */
-    @Override
-    public Expression simple() {
-        return new Cos(getA());
-    }
-
-    /**
      * returns a nice string representation of the expression.
      *
      * @return string representation.

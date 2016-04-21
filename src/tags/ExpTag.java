@@ -1,4 +1,4 @@
-package Simplification;
+package tags;
 
 import operands.Var;
 import structure.Expression;
@@ -9,13 +9,13 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 18-Apr-16.
  */
-public class Tag extends Var implements Expression {
+public class ExpTag extends Var implements Expression, Tag {
     /**
      * constructor.
      *
      * @param value tag.
      */
-    public Tag(String value) {
+    public ExpTag(String value) {
         super(value);
     }
 
@@ -27,5 +27,10 @@ public class Tag extends Var implements Expression {
     @Override
     public String toString() {
         return "#" + getValue();
+    }
+
+    @Override
+    public boolean check(Expression e) {
+        return true;
     }
 }

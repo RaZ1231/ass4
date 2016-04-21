@@ -1,6 +1,7 @@
 package structure;
 
 import operands.Num;
+import simplification.RuleChecker;
 
 import java.util.List;
 import java.util.Map;
@@ -84,8 +85,11 @@ public abstract class BaseExpression {
      *
      * @return simplified expression.
      */
-    protected abstract Expression simple();
+    public Expression simple() {
+        RuleChecker checker = new RuleChecker();
 
+        return checker.applyRules((Expression) this);
+    }
     /**
      * Simplifies sons of base expression
      *

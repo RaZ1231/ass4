@@ -7,7 +7,7 @@ import structure.Expression;
 import structure.UnaryExpression;
 
 /**
- *  sin class representation.
+ * sin class representation.
  *
  * @author Elisheva Broyer.
  * @since 13/04/2016.
@@ -71,16 +71,6 @@ public class Sin extends UnaryExpression implements Expression {
     @Override
     public Expression derivative(String var) {
         return new Mult(new Cos(getA()), getA().differentiate(var));
-    }
-
-    /**
-     * returned a simplified version of the current expression.
-     *
-     * @return simplified expression.
-     */
-    @Override
-    public Expression simple() {
-        return new Sin(getA());
     }
 
     /**

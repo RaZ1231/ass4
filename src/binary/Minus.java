@@ -1,6 +1,5 @@
 package binary;
 
-import Simplifiers.MinusSimplifier;
 import operands.Num;
 import operands.Var;
 import structure.BinaryExpression;
@@ -96,20 +95,6 @@ public class Minus extends BinaryExpression implements Expression {
     @Override
     public Expression derivative(String var) {
         return new Minus(getA().differentiate(var), getB().differentiate(var));
-    }
-
-    /**
-     * Returned a simplified version of the current expression.
-     *
-     * @return simplified expression
-     */
-    @Override
-    public Expression simple() {
-        MinusSimplifier simplifier = new MinusSimplifier();
-
-        simplifier.initBy(this);
-
-        return simplifier.simplify(this);
     }
 
     /**
