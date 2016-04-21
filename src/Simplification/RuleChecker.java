@@ -1,9 +1,11 @@
-package Simplification;
+package simplification;
 
-import operands.Num;
+import binary.Mult;
+import binary.Plus;
 import structure.BinaryExpression;
 import structure.Expression;
 import structure.UnaryExpression;
+import tags.*;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -74,32 +76,37 @@ public class RuleChecker {
     }
 
     /**
-     * compare two expressions.
+     * compare two expressions and fill tags map.
      *
      * @param rule       first.
      * @param expression second.
      * @return true/false.
      */
     private boolean compare(Expression rule, Expression expression) {
-        if (rule instanceof NumTag) { //NumTag
-            NumTag tag = (NumTag) rule;
+        if (rule instanceof Tag) { //Tag
+            Tag tag;
 
-            try { //check if numeric
-                put(tag.getValue(), new Num(expression.evaluate()));
-                return true;
-            } catch (Exception e) {
+            if (rule instanceof ExpTag) {
+                tag = (ExpTag) rule;
+            } else if (rule instanceof VarTag) {
+                tag = (VarTag) rule;
+            } else if (rule instanceof NumTag) {
+                tag = (NumTag) rule;
+            } else if (rule instanceof IntTag) {
+                tag = (IntTag) rule;
+            } else {
                 return false;
             }
-        } else if (rule instanceof Tag) { //Tag
-            Tag tag = (Tag) rule;
 
             if (containsKey(tag.getValue())) { //check if exists
                 return expression.equals(get(tag.getValue()));
-            } else {
+            } else if (tag.check(expression)) {
                 put(tag.getValue(), expression);
                 return true;
+            } else {
+                return false;
             }
-        } else if (rule.getClass() == expression.getClass()) {
+        } else if (rule.getClass() == expression.getClass()) { //BaseExpression
             if (expression instanceof UnaryExpression) { //unary
                 UnaryExpression unaryRule = (UnaryExpression) rule;
                 UnaryExpression unaryExpression = (UnaryExpression) expression;
@@ -109,8 +116,21 @@ public class RuleChecker {
                 BinaryExpression binaryRule = (BinaryExpression) rule;
                 BinaryExpression binaryExpression = (BinaryExpression) expression;
 
-                return compare(binaryRule.getA(), binaryExpression.getA())
-                        && compare(binaryRule.getB(), binaryExpression.getB());
+                if (expression instanceof Plus || expression instanceof Mult) { //commutative
+                    RuleChecker checker = new RuleChecker();
+
+                    if (checker.check(binaryRule.getA(), binaryExpression.getA())
+                            && checker.check(binaryRule.getB(), binaryExpression.getB())) {
+                        return (compare(binaryRule.getA(), binaryExpression.getA())
+                                && compare(binaryRule.getB(), binaryExpression.getB()));
+                    } else {
+                        return (compare(binaryRule.getA(), binaryExpression.getB())
+                                && compare(binaryRule.getB(), binaryExpression.getA()));
+                    }
+                } else {
+                    return compare(binaryRule.getA(), binaryExpression.getA())
+                            && compare(binaryRule.getB(), binaryExpression.getB());
+                }
             } else { //var
                 return rule.equals(expression);
             }
@@ -125,6 +145,7 @@ public class RuleChecker {
      * @param simple simple form of rule.
      * @return simple expression.
      */
+
     private Expression applyRule(Expression simple) {
         for (Entry<String, Expression> tag : tags.entrySet()) {
             simple = simple.assign(tag.getKey(), tag.getValue());
@@ -158,11 +179,12 @@ public class RuleChecker {
      * @return simple expression.
      */
     public Expression applyRules(Expression expression) {
+        Rules rules = new Rules();
         int i = 0;
 
-        while (i < Rules.RULES.size()) {
+        while (i < rules.getRules().size()) {
             try {
-                expression = apply(Rules.RULES.get(i), expression);
+                expression = apply(rules.getRules().get(i), expression);
                 i = 0;
             } catch (Exception e) {
                 i++;

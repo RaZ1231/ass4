@@ -1,6 +1,5 @@
-package Simplification;
+package simplification;
 
-import com.sun.xml.internal.txw2.DatatypeWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,44 +10,71 @@ import java.util.List;
  * @since 20-Apr-16.
  */
 public class Rules {
-    static final List<Rule> RULES = new ArrayList<Rule>() {{ //list of rules
-        add(new Rule("(#1 + 0)", "#1"));
-        add(new Rule("(0 + #1)", "#1"));
-        add(new Rule("((@1 * #2) + (@3 * #1))", "((@1 + @3) * #1)"));///?
-        add(new Rule("(#1 - 0)", "#1"));
-        add(new Rule("(0 - #1)", "(-#1)"));
-        add(new Rule("(#1 - #1)", "0"));
-        add(new Rule("(-(-#1))", "#1"));
-        add(new Rule("(#1 * 0)", "0"));
-        add(new Rule("(0 * #1)", "0"));
-        add(new Rule("(#1 * 1)", "#1"));
-        add(new Rule("(1 * #1)", "#1"));
-        add(new Rule("(#1 * #1)", "(#1^2)"));
-        add(new Rule("(0 / #1)","0"));
-        add(new Rule("(#1 / 0)","Crisis!!!"));///////?
-        add(new Rule("(#1 / 1)","#1"));
-        add(new Rule("(#1 / #1)", "1"));
-        add(new Rule("log(#1, 1)", "0"));
-        add(new Rule("log(#1, #1)", "1"));
-        add(new Rule("(log(#1, #2) - log(#1, #3))", "log(#1, (#2 / #3))"));/// opposite?
-        add(new Rule("(log(#1, #2) + log(#1, #3))", "log(#1, (#2 * #3))"));/// opposite?
-        add(new Rule("(log(#1, #2) / log(#1, #3))", "log(#3, #2)"));
-        add(new Rule("(#1^log(#1, #2))", "#2"));
-        add(new Rule("log(#1, (#2^#3))", "(#3 * log(#1, #2))"));
-        add(new Rule("log(#1, (#2^(#3 / #4)))", "((#4 / #3) * log(#1, #2))"));/// is problem with above?
-        add(new Rule("(#1^0)", "1"));
-        add(new Rule("(1^#1)", "1"));
-        add(new Rule("(0^#1)", "0"));
-        add(new Rule("(1 / (#1 ^ #2))", "(#1^(-#2))"));/// opposite?
-        add(new Rule("((#1^#2)^#3)", "(#1^(#2 * #3))"));
-        add(new Rule("((#1^#2) * (#1^#3))", "#1^(#2 + #3)"));
-        add(new Rule("((#1^#2) * (#3^#2))", "((#1 * #3)^#2)"));
-        add(new Rule("((#1^#2) / (#1^#3))", "#1^(#2 - #3)"));
-        add(new Rule("((#1^#2) / (#3^#2))", "((#1 / #3)^#2)"));
-        add(new Rule("sin((#1 * pi)", "0"));
-        add(new Rule("cos((#1 * (pi / 2))", "0"));
-        add(new Rule("((sin(#1)^2) + (cos(#1))^2))", "1"));
-        add(new Rule("((cos(#1))^2) + (sin(#1)^2))", "1"));
+    private static List<Rule> rules;
+    private static boolean isInit = false;
 
-    }};
+    public List<Rule> getRules() {
+        if (!isInit) {
+            init();
+        }
+        return rules;
+    }
+
+    private void init() {
+        isInit = true;
+        rules = new ArrayList<>(); //list of rules
+        //Simple rules
+        rules.add(new Rule("(#1 + 0)", "#1"));
+        rules.add(new Rule("(#1 - 0)", "#1"));
+        rules.add(new Rule("(0 - #1)", "(-#1)"));
+        rules.add(new Rule("(#1 - #1)", "0"));
+        rules.add(new Rule("(#1 * 0)", "0"));
+        rules.add(new Rule("(#1 * 1)", "#1"));
+        rules.add(new Rule("(0 / #1)", "0"));
+        rules.add(new Rule("(#1 / 1)", "#1"));
+        rules.add(new Rule("(#1 / #1)", "1"));
+        rules.add(new Rule("log(#1, 1)", "0"));
+        rules.add(new Rule("log(#1, #1)", "1"));
+        rules.add(new Rule("(#1^0)", "1"));
+        rules.add(new Rule("(1^#1)", "1"));
+        rules.add(new Rule("(#1^1)", "#1"));
+        rules.add(new Rule("(0^#1)", "0"));
+
+        //Complex rules
+        rules.add(new Rule("(-(-#1))", "#1"));
+        rules.add(new Rule("(#1 + #1)", "(2 * #1)"));
+        rules.add(new Rule("((@1 * #2) + #2)", "((@1 + 1) * #2)"));
+        rules.add(new Rule("((@1 * #2) + (@3 * #2))", "((@1 + @3) * #2)"));
+        rules.add(new Rule("(@1 + (@2 + &3))", "((@1 + @2) + &3)"));
+        rules.add(new Rule("((@1 * #2) + (#3 + (@4 * #2)))", "(((@1 + @4) * #2) + #3)"));
+        rules.add(new Rule("(#1 * #1)", "(#1^2)"));
+        rules.add(new Rule("(#1 * (#1^#2))", "(#1^(1 + #2))"));
+        rules.add(new Rule("log(#1, (&2 / #3))", "(log(#1, &2) - log(#1, #3))"));
+        rules.add(new Rule("log(#1, (#2 / &3))", "(log(#1, #2) - log(#1, &3))"));
+        rules.add(new Rule("log(#1, (&2 * #3))", "(log(#1, &2) + log(#1, #3))"));
+        rules.add(new Rule("(log(#1, @2) - log(#1, @3))", "log(#1, (@2 / @3))"));
+        rules.add(new Rule("(log(#1, @2) + log(#1, @3))", "log(#1, (@2 * @3))"));
+        rules.add(new Rule("(log(#1, #2) / log(#1, #3))", "log(#3, #2)"));
+        rules.add(new Rule("(#1^log(#1, #2))", "#2"));
+        rules.add(new Rule("log(#1, (#2^#3))", "(#3 * log(#1, #2))"));
+        rules.add(new Rule("(1 / (#1^#2))", "(#1^(-#2))"));
+        rules.add(new Rule("((#1^#2)^#3)", "(#1^(#2 * #3))"));
+        rules.add(new Rule("((#1^#2) * (#1^#3))", "#1^(#2 + #3)"));
+        rules.add(new Rule("((@1^#2) * (@3^#2))", "((@1 * @3)^#2)"));
+        rules.add(new Rule("((#1^#2) / #1)", "#1^(#2 - 1)"));
+        rules.add(new Rule("(#1 / (#1^#2))", "#1^(1 - #2)"));
+        rules.add(new Rule("((#1^#2) / (#1^#3))", "#1^(#2 - #3)"));
+        rules.add(new Rule("((@1^#2) / (@3^#2))", "((@1 / @3)^#2)"));
+        rules.add(new Rule("((#1 / #2) + (#3 / #2))", "((#1 + #3) / #2"));
+        rules.add(new Rule("((#1 / #2) - (#3 / #2))", "((#1 - #3) / #2"));
+        rules.add(new Rule("((#1 / #2) + (#3 / #4))", "(((#1 * #4) + (#3 * #2)) / (#2 * #4))"));
+        rules.add(new Rule("((#1 / #2) - (#3 / #4))", "(((#1 * #4) - (#3 * #2)) / (#2 * #4))"));
+        rules.add(new Rule("((sin(#1)^2) + (cos(#1)^2))", "1"));
+        rules.add(new Rule("sin(pi - #1)", "sin(#1)"));
+        rules.add(new Rule("cos(pi - #1)", "(-cos(#1))"));
+        rules.add(new Rule("sin((-#1))", "(-sin(#1))"));
+        rules.add(new Rule("cos((-#1))", "cos(#1)"));
+
+
+    }
 }
