@@ -23,41 +23,11 @@ public abstract class UnaryExpression extends BaseExpression {
     }
 
     /**
-     * evaluates sons of expression.
-     *
-     * @param assignment variables' values to assign.
-     * @return equation solution for the assignment.
-     * @throws Exception
-     */
-    @Override
-    protected double evaluateSons(Map<String, Double> assignment) throws Exception {
-        return operate(getA().evaluate(assignment));
-    }
-
-    /**
-     * an abstract operation function.
-     *
-     * @param a a parameter.
-     * @return operation result.
-     */
-    protected abstract double operate(double a);
-
-    /**
-     * get left son.
-     *
-     * @return left son.
-     */
-    public Expression getA() {
-        return a;
-    }
-
-    /**
      * get variables of sons.
      *
      * @return list containing the variables in the expression.
      */
-    @Override
-    protected List<String> getVariablesSons() {
+    public List<String> getVariables() {
         List<String> vars = new LinkedList<String>();
 
         vars.addAll(getA().getVariables());
@@ -72,8 +42,7 @@ public abstract class UnaryExpression extends BaseExpression {
      * @param expression expression to put instead.
      * @return modified sons
      */
-    @Override
-    protected Expression assignSons(String var, Expression expression) {
+    public Expression assign(String var, Expression expression) {
         return create(getA().assign(var, expression));
     }
 
@@ -96,12 +65,33 @@ public abstract class UnaryExpression extends BaseExpression {
     }
 
     /**
-     * returns the derivative of an expression.
+     * evaluates sons of expression.
      *
-     * @param var a string variable.
-     * @return the derivative of an expression.
+     * @param assignment variables' values to assign.
+     * @return equation solution for the assignment.
+     * @throws Exception
      */
-    public abstract Expression derivative(String var);
+    @Override
+    public double evaluate(Map<String, Double> assignment) throws Exception {
+        return operate(getA().evaluate(assignment));
+    }
+
+    /**
+     * an abstract operation function.
+     *
+     * @param a a parameter.
+     * @return operation result.
+     */
+    protected abstract double operate(double a);
+
+    /**
+     * get left son.
+     *
+     * @return left son.
+     */
+    public Expression getA() {
+        return a;
+    }
 
     /**
      * returns true if equals, false otherwise.

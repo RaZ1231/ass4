@@ -26,6 +26,50 @@ public abstract class BinaryExpression extends BaseExpression {
     }
 
     /**
+     * get variables of sons.
+     *
+     * @return list containing the variables in the expression.
+     */
+    public List<String> getVariables() {
+        List<String> vars = new LinkedList<String>();
+
+        vars.addAll(getA().getVariables());
+        vars.addAll(getB().getVariables());
+
+        return vars;
+    }
+
+    /**
+     * return assignment of sons.
+     *
+     * @param var        variable to replace.
+     * @param expression expression to put instead.
+     * @return modified sons.
+     */
+    public Expression assign(String var, Expression expression) {
+        return create(getA().assign(var, expression), getB().assign(var, expression));
+    }
+
+    /**
+     * returns new expression by type.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     * @return a new expression by type.
+     */
+    protected abstract Expression create(Expression a, Expression b);
+
+    /**
+     * Simplifies sons of base expression.
+     *
+     * @return base expression with simplified sons.
+     */
+    @Override
+    protected BaseExpression simplifySons() {
+        return (BaseExpression) create(getA().simplify(), getB().simplify());
+    }
+
+    /**
      * evaluates sons of expression.
      *
      * @param assignment variables' values to assign
@@ -33,7 +77,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * @throws Exception
      */
     @Override
-    protected double evaluateSons(Map<String, Double> assignment) throws Exception {
+    public double evaluate(Map<String, Double> assignment) throws Exception {
         return operate(getA().evaluate(assignment), getB().evaluate(assignment));
     }
 
@@ -63,60 +107,6 @@ public abstract class BinaryExpression extends BaseExpression {
     public Expression getB() {
         return b;
     }
-
-    /**
-     * get variables of sons.
-     *
-     * @return list containing the variables in the expression.
-     */
-    @Override
-    protected List<String> getVariablesSons() {
-        List<String> vars = new LinkedList<String>();
-
-        vars.addAll(getA().getVariables());
-        vars.addAll(getB().getVariables());
-
-        return vars;
-    }
-
-    /**
-     * return assignment of sons.
-     *
-     * @param var        variable to replace.
-     * @param expression expression to put instead.
-     * @return modified sons.
-     */
-    @Override
-    protected Expression assignSons(String var, Expression expression) {
-        return create(getA().assign(var, expression), getB().assign(var, expression));
-    }
-
-    /**
-     * returns new expression by type.
-     *
-     * @param a an expression.
-     * @param b another expression.
-     * @return a new expression by type.
-     */
-    protected abstract Expression create(Expression a, Expression b);
-
-    /**
-     * Simplifies sons of base expression.
-     *
-     * @return base expression with simplified sons.
-     */
-    @Override
-    protected BaseExpression simplifySons() {
-        return (BaseExpression) create(getA().simplify(), getB().simplify());
-    }
-
-    /**
-     * returns the derivative of an expression.
-     *
-     * @param var a string variable.
-     * @return the derivative of an expression.
-     */
-    public abstract Expression derivative(String var);
 
     /**
      * returns true if equals, false otherwise.

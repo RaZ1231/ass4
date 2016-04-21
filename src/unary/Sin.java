@@ -63,13 +63,13 @@ public class Sin extends UnaryExpression implements Expression {
     }
 
     /**
-     * returns the derivative of an expression.
+     * returns the differentiate of an expression.
      *
      * @param var a string variable.
-     * @return the derivative of an expression.
+     * @return the differentiate of an expression.
      */
     @Override
-    public Expression derivative(String var) {
+    public Expression differentiate(String var) {
         return new Mult(new Cos(getA()), getA().differentiate(var));
     }
 

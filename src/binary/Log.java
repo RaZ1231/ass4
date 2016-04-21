@@ -64,18 +64,6 @@ public class Log extends BinaryExpression implements Expression {
     }
 
     /**
-     * an operation function.
-     *
-     * @param a a parameter.
-     * @param b another parameter.
-     * @return operation result.
-     */
-    @Override
-    public double operate(double a, double b) {
-        return Math.log(b) / Math.log(a);
-    }
-
-    /**
      * returns new expression by type.
      *
      * @param a an expression.
@@ -88,13 +76,25 @@ public class Log extends BinaryExpression implements Expression {
     }
 
     /**
-     * returns the derivative of an expression.
+     * an operation function.
      *
-     * @param var a string variable.
-     * @return the derivative of an expression.
+     * @param a a parameter.
+     * @param b another parameter.
+     * @return operation result.
      */
     @Override
-    public Expression derivative(String var) {
+    public double operate(double a, double b) {
+        return Math.log(b) / Math.log(a);
+    }
+
+    /**
+     * returns the differentiate of an expression.
+     *
+     * @param var a string variable.
+     * @return the differentiate of an expression.
+     */
+    @Override
+    public Expression differentiate(String var) {
         return new Mult(
                 new Div(
                         new Num(1), new Mult(getB(), new Log(new Const("e", Math.exp(1)), getA()))),

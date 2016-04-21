@@ -63,18 +63,6 @@ public class Minus extends BinaryExpression implements Expression {
     }
 
     /**
-     * an operation function.
-     *
-     * @param a a parameter.
-     * @param b another parameter.
-     * @return operation result.
-     */
-    @Override
-    public double operate(double a, double b) {
-        return a - b;
-    }
-
-    /**
      * returns new expression by type.
      *
      * @param a an expression.
@@ -87,13 +75,25 @@ public class Minus extends BinaryExpression implements Expression {
     }
 
     /**
-     * returns the derivative of an expression.
+     * an operation function.
      *
-     * @param var a string variable.
-     * @return the derivative of an expression.
+     * @param a a parameter.
+     * @param b another parameter.
+     * @return operation result.
      */
     @Override
-    public Expression derivative(String var) {
+    public double operate(double a, double b) {
+        return a - b;
+    }
+
+    /**
+     * returns the differentiate of an expression.
+     *
+     * @param var a string variable.
+     * @return the differentiate of an expression.
+     */
+    @Override
+    public Expression differentiate(String var) {
         return new Minus(getA().differentiate(var), getB().differentiate(var));
     }
 
