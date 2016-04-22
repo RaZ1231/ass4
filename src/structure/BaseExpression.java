@@ -18,27 +18,24 @@ public abstract class BaseExpression {
      * @return simplified expression.
      */
     public Expression simplify() {
-        try {
-            return new Num(evaluate());
-        } catch (Exception e) {
-            Expression simple = simplifySons().simple();
+        Expression simple = (Expression) this;
+        Expression previous;
+
+        do { // evaluate and simplify until the expression isn't changing.
             try {
                 return new Num(simple.evaluate());
-            } catch (Exception e1) {
-                return simple;
-            }
-        }
-    }
+            } catch (Exception e) {
+                previous = simple;
 
-    /**
-     * a convenience method. Similar to `evaluate(assignment)` method above,
-     * but uses an empty assignment.
-     *
-     * @return equation solution.
-     * @throws Exception
-     */
-    public double evaluate() throws Exception {
-        return evaluate(null);
+                try {
+                    simple = ((BaseExpression) simple).simplifySons().simple();
+                } catch (Exception e2) {
+                    break;
+                }
+            }
+        } while (!simple.equals(previous));
+
+        return previous;
     }
 
     /**
@@ -58,6 +55,17 @@ public abstract class BaseExpression {
      * @return base expression with simplified sons
      */
     protected abstract BaseExpression simplifySons();
+
+    /**
+     * a convenience method. Similar to `evaluate(assignment)` method above,
+     * but uses an empty assignment.
+     *
+     * @return equation solution.
+     * @throws Exception
+     */
+    public double evaluate() throws Exception {
+        return evaluate(null);
+    }
 
     /**
      * Evaluate the expression using the variable values provided

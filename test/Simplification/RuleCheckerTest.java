@@ -176,4 +176,31 @@ public class RuleCheckerTest {
         Expression expected = new Var("x");
         Expression actual = checker.applyRules(expression);
     }
+
+    @Test
+    public void applyRules2() {
+        Expression expression = new Div(new Pow("x", 4), new Var("x"));
+        RuleChecker checker = new RuleChecker();
+
+        Expression expected = new Pow("x", 3);
+        Expression actual = checker.applyRules(expression);
+    }
+
+    @Test
+    public void applyRules3() {
+        Expression expression = new Pow(new Plus(3, 4), new Var("x"));
+        RuleChecker checker = new RuleChecker();
+
+        Expression expected = new Pow(7, "x");
+        Expression actual = checker.applyRules(expression);
+    }
+
+    @Test
+    public void applyRules4() {
+        Expression expression = new Pow(new Var("x"), new Plus(3, 4));
+        RuleChecker checker = new RuleChecker();
+
+        Expression expected = new Pow("x", 7);
+        Expression actual = checker.applyRules(expression);
+    }
 }

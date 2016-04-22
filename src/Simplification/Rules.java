@@ -42,6 +42,12 @@ public class Rules {
 
         //Complex rules
         rules.add(new Rule("(-(-#1))", "#1"));
+        rules.add(new Rule("(#1 + (-#2))", "(#1 - #2)"));
+        rules.add(new Rule("(#1 - (-#2))", "(#1 + #2)"));
+        rules.add(new Rule("(#1 * (-#2))", "(-(#1 * #2))"));
+        rules.add(new Rule("((-#1) * (-#2))", "(#1 * #2)"));
+        rules.add(new Rule("(#1 / (-#2))", "(-(#1 / #2))"));
+        rules.add(new Rule("((-#1) / (-#2))", "(#1 / #2)"));
         rules.add(new Rule("(#1 + #1)", "(2 * #1)"));
         rules.add(new Rule("((@1 * #2) + #2)", "((@1 + 1) * #2)"));
         rules.add(new Rule("((@1 * #2) + (@3 * #2))", "((@1 + @3) * #2)"));
@@ -61,12 +67,12 @@ public class Rules {
         rules.add(new Rule("((#1^#2)^#3)", "(#1^(#2 * #3))"));
         rules.add(new Rule("((#1^#2) * (#1^#3))", "#1^(#2 + #3)"));
         rules.add(new Rule("((@1^#2) * (@3^#2))", "((@1 * @3)^#2)"));
-        rules.add(new Rule("((#1^#2) / #1)", "#1^(#2 - 1)"));
-        rules.add(new Rule("(#1 / (#1^#2))", "#1^(1 - #2)"));
-        rules.add(new Rule("((#1^#2) / (#1^#3))", "#1^(#2 - #3)"));
+        rules.add(new Rule("((#1^#2) / #1)", "(#1^(#2 - 1))"));
+        rules.add(new Rule("(#1 / (#1^#2))", "(#1^(1 - #2))"));
+        rules.add(new Rule("((#1^#2) / (#1^#3))", "(#1^(#2 - #3))"));
         rules.add(new Rule("((@1^#2) / (@3^#2))", "((@1 / @3)^#2)"));
-        rules.add(new Rule("((#1 / #2) + (#3 / #2))", "((#1 + #3) / #2"));
-        rules.add(new Rule("((#1 / #2) - (#3 / #2))", "((#1 - #3) / #2"));
+        rules.add(new Rule("((#1 / #2) + (#3 / #2))", "((#1 + #3) / #2)"));
+        rules.add(new Rule("((#1 / #2) - (#3 / #2))", "((#1 - #3) / #2)"));
         rules.add(new Rule("((#1 / #2) + (#3 / #4))", "(((#1 * #4) + (#3 * #2)) / (#2 * #4))"));
         rules.add(new Rule("((#1 / #2) - (#3 / #4))", "(((#1 * #4) - (#3 * #2)) / (#2 * #4))"));
         rules.add(new Rule("((sin(#1)^2) + (cos(#1)^2))", "1"));

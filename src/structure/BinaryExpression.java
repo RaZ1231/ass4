@@ -40,6 +40,24 @@ public abstract class BinaryExpression extends BaseExpression {
     }
 
     /**
+     * get left son.
+     *
+     * @return left son.
+     */
+    public Expression getA() {
+        return a;
+    }
+
+    /**
+     * get right son.
+     *
+     * @return right son.
+     */
+    public Expression getB() {
+        return b;
+    }
+
+    /**
      * return assignment of sons.
      *
      * @param var        variable to replace.
@@ -78,12 +96,7 @@ public abstract class BinaryExpression extends BaseExpression {
      */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
-        try {
-            return operate(getA().evaluate(assignment), getB().evaluate(assignment));
-        } catch (Exception e1) {
-            getB().evaluate();
-            throw new Exception("cannot evaluate 'a'");
-        }
+        return operate(getA().evaluate(assignment), getB().evaluate(assignment));
     }
 
     /**
@@ -94,24 +107,6 @@ public abstract class BinaryExpression extends BaseExpression {
      * @return operation result.
      */
     protected abstract double operate(double a, double b);
-
-    /**
-     * get left son.
-     *
-     * @return left son.
-     */
-    public Expression getA() {
-        return a;
-    }
-
-    /**
-     * get right son.
-     *
-     * @return right son.
-     */
-    public Expression getB() {
-        return b;
-    }
 
     /**
      * returns true if equals, false otherwise.
