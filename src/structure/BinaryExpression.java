@@ -78,7 +78,12 @@ public abstract class BinaryExpression extends BaseExpression {
      */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
-        return operate(getA().evaluate(assignment), getB().evaluate(assignment));
+        try {
+            return operate(getA().evaluate(assignment), getB().evaluate(assignment));
+        } catch (Exception e1) {
+            getB().evaluate();
+            throw new Exception("cannot evaluate 'a'");
+        }
     }
 
     /**
