@@ -22,7 +22,7 @@ import unary.Sin;
  */
 public class SimplificationDemo {
     public static void main(String[] args) {
-        Expression[] expressions = new Expression[4];
+        Expression[] expressions = new Expression[5];
 
         expressions[0] = new Plus(
                 new Pow(
@@ -39,6 +39,10 @@ public class SimplificationDemo {
                         new Plus(new Num(0), new Var("y")), new Num(0)),
                 new Pow(new Var("y"), new Num(8)));
         expressions[3] = new Plus(new Div(new Var("x"), new Num(3)), new Div(new Num(5), new Var("y")));
+        expressions[4] = new Div(
+                new Pow(new Minus("x", 6), new Num(3)),
+                new Mult(new Num(4), new Minus("x", 6)));
+
 
         for (Expression e: expressions){
             printPairs(e);
