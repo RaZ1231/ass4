@@ -3,7 +3,6 @@ package binary;
 import operands.Num;
 import org.junit.Test;
 import structure.Expression;
-
 import static org.junit.Assert.assertEquals;
 
 /**

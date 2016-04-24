@@ -1,6 +1,11 @@
 package simplification;
 
-import binary.*;
+import binary.Div;
+import binary.Log;
+import binary.Minus;
+import binary.Mult;
+import binary.Plus;
+import binary.Pow;
 import operands.Const;
 import operands.Num;
 import operands.Var;
@@ -13,7 +18,6 @@ import tags.VarTag;
 import unary.Cos;
 import unary.Neg;
 import unary.Sin;
-
 import static org.junit.Assert.assertEquals;
 
 /**

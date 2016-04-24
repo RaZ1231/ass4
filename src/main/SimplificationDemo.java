@@ -10,6 +10,11 @@ import structure.Expression;
  * @since 22/04/2016.
  */
 public class SimplificationDemo {
+    /**
+     * main method.
+     *
+     * @param args data from user.
+     */
     public static void main(String[] args) {
         Expression[] expressions = new Expression[5];
         Parser p = new Parser();
@@ -29,6 +34,11 @@ public class SimplificationDemo {
         }
     }
 
+    /**
+     * prints out pairs of non-simplified and simplified expressions.
+     *
+     * @param exp an expression.
+     */
     private static void printPairs(Expression exp) {
         System.out.println(exp.toString());
         System.out.println(exp.simplify().toString());

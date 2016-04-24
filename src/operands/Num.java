@@ -1,9 +1,8 @@
 package operands;
 
-import structure.Expression;
-
 import java.util.List;
 import java.util.Map;
+import structure.Expression;
 
 /**
  * number representation class.
@@ -71,7 +70,7 @@ public class Num implements Expression {
      *
      * @param assignment variables' values to assign
      * @return equation solution for the assignment
-     * @throws Exception
+     * @throws Exception an exception.
      */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
@@ -83,7 +82,7 @@ public class Num implements Expression {
      * but uses an empty assignment.
      *
      * @return equation solution
-     * @throws Exception
+     * @throws Exception an exception.
      */
     @Override
     public double evaluate() throws Exception {

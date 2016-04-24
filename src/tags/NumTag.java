@@ -11,24 +11,30 @@ import structure.Expression;
  */
 public class NumTag extends Var implements Expression, Tag {
     /**
-     * constructor
+     * constructor.
      *
-     * @param value tag
+     * @param value tag.
      */
     public NumTag(String value) {
         super(value);
     }
 
     /**
-     * returns string representation
+     * returns string representation.
      *
-     * @return string
+     * @return string.
      */
     @Override
     public String toString() {
         return "@" + getValue();
     }
 
+    /**
+     * check if expression match tag type.
+     *
+     * @param expression an expression.
+     * @return true if match, false otherwise.
+     */
     @Override
     public boolean check(Expression expression) {
         try {

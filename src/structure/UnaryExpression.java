@@ -49,10 +49,10 @@ public abstract class UnaryExpression extends BaseExpression {
     /**
      * returns new expression by type.
      *
-     * @param a an expression.
+     * @param e an expression.
      * @return a new expression by type.
      */
-    protected abstract Expression create(Expression a);
+    protected abstract Expression create(Expression e);
 
     /**
      * simplifies sons of base expression.
@@ -69,7 +69,7 @@ public abstract class UnaryExpression extends BaseExpression {
      *
      * @param assignment variables' values to assign.
      * @return equation solution for the assignment.
-     * @throws Exception
+     * @throws Exception an exception.
      */
     @Override
     public double evaluate(Map<String, Double> assignment) throws Exception {
@@ -79,10 +79,10 @@ public abstract class UnaryExpression extends BaseExpression {
     /**
      * an abstract operation function.
      *
-     * @param a a parameter.
+     * @param d a parameter.
      * @return operation result.
      */
-    protected abstract double operate(double a);
+    protected abstract double operate(double d);
 
     /**
      * get left son.

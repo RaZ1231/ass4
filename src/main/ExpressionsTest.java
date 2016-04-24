@@ -3,12 +3,11 @@ package main;
 import binary.Mult;
 import binary.Plus;
 import binary.Pow;
+import java.util.Map;
+import java.util.TreeMap;
 import operands.Const;
 import structure.Expression;
 import unary.Sin;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Testing assignment.
@@ -21,7 +20,7 @@ public class ExpressionsTest {
      * main method.
      *
      * @param args data from user.
-     * @throws Exception
+     * @throws Exception an exception.
      */
     public static void main(String[] args) throws Exception {
         Expression expression = new Plus(

@@ -29,6 +29,12 @@ public class ExpTag extends Var implements Expression, Tag {
         return "#" + getValue();
     }
 
+    /**
+     * check if expression match tag type.
+     *
+     * @param e an expression.
+     * @return true if match, false otherwise.
+     */
     @Override
     public boolean check(Expression e) {
         return true;

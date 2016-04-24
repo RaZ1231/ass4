@@ -19,7 +19,7 @@ public interface Expression {
      *
      * @param assignment variables' values to assign
      * @return equation solution for the assignment
-     * @throws Exception
+     * @throws Exception an exception.
      */
     double evaluate(Map<String, Double> assignment) throws Exception;
 
@@ -28,7 +28,7 @@ public interface Expression {
      * but uses an empty assignment.
      *
      * @return equation solution
-     * @throws Exception
+     * @throws Exception an exception.
      */
     double evaluate() throws Exception;
 

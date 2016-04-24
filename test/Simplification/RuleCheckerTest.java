@@ -1,6 +1,11 @@
 package simplification;
 
-import binary.*;
+import binary.Div;
+import binary.Log;
+import binary.Minus;
+import binary.Mult;
+import binary.Plus;
+import binary.Pow;
 import operands.Num;
 import operands.Var;
 import org.junit.Test;
@@ -9,8 +14,9 @@ import tags.ExpTag;
 import tags.NumTag;
 import tags.VarTag;
 import unary.Sin;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Raziel Solomon

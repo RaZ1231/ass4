@@ -1,9 +1,8 @@
 package structure;
 
+import java.util.Map;
 import operands.Num;
 import simplification.RuleChecker;
-
-import java.util.Map;
 
 /**
  * base expression class representation.
@@ -50,7 +49,7 @@ public abstract class BaseExpression {
     }
 
     /**
-     * Simplifies sons of base expression
+     * Simplifies sons of base expression.
      *
      * @return base expression with simplified sons
      */
@@ -61,7 +60,7 @@ public abstract class BaseExpression {
      * but uses an empty assignment.
      *
      * @return equation solution.
-     * @throws Exception
+     * @throws Exception an exception.
      */
     public double evaluate() throws Exception {
         return evaluate(null);
@@ -75,7 +74,7 @@ public abstract class BaseExpression {
      *
      * @param assignment variables' values to assign.
      * @return equation solution for the assignment.
-     * @throws Exception
+     * @throws Exception an exception.
      */
     public abstract double evaluate(Map<String, Double> assignment) throws Exception;
 }
