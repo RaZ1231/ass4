@@ -16,11 +16,11 @@ public class Pow extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
-     * @param a a double variable.
-     * @param b another double variable.
+     * @param a an expression.
+     * @param b another expression.
      */
-    public Pow(double a, double b) {
-        this(new Num(a), new Num(b));
+    public Pow(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**
@@ -29,8 +29,48 @@ public class Pow extends BinaryExpression implements Expression {
      * @param a an expression.
      * @param b another expression.
      */
-    public Pow(Expression a, Expression b) {
-        super(a, b);
+    public Pow(Expression a, double b) {
+        super(a, new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Pow(double a, Expression b) {
+        super(new Num(a), b);
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Pow(Expression a, String b) {
+        super(a, new Var(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Pow(String a, Expression b) {
+        super(new Var(a), b);
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a a double variable.
+     * @param b another double variable.
+     */
+    public Pow(double a, double b) {
+        this(new Num(a), new Num(b));
     }
 
     /**

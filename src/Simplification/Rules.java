@@ -13,6 +13,11 @@ public class Rules {
     private static List<Rule> rules;
     private static boolean isInit = false;
 
+    /**
+     * returns list of rules.
+     *
+     * @return list of rules.
+     */
     public List<Rule> getRules() {
         if (!isInit) {
             init();
@@ -20,6 +25,9 @@ public class Rules {
         return rules;
     }
 
+    /**
+     * initialized list of rules to compare with.
+     */
     private void init() {
         isInit = true;
         rules = new ArrayList<>(); //list of rules

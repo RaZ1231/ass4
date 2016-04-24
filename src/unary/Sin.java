@@ -16,19 +16,19 @@ public class Sin extends UnaryExpression implements Expression {
     /**
      * constructor.
      *
-     * @param a a double variable.
+     * @param a an expression.
      */
-    public Sin(double a) {
-        this(new Num(a));
+    public Sin(Expression a) {
+        super(a);
     }
 
     /**
      * constructor.
      *
-     * @param a an expression.
+     * @param a a double variable.
      */
-    public Sin(Expression a) {
-        super(a);
+    public Sin(double a) {
+        this(new Num(a));
     }
 
     /**

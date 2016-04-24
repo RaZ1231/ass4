@@ -15,11 +15,11 @@ public class Plus extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
-     * @param a a double variable.
-     * @param b another double variable.
+     * @param a an expression.
+     * @param b another expression.
      */
-    public Plus(double a, double b) {
-        this(new Num(a), new Num(b));
+    public Plus(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**
@@ -28,8 +28,48 @@ public class Plus extends BinaryExpression implements Expression {
      * @param a an expression.
      * @param b another expression.
      */
-    public Plus(Expression a, Expression b) {
-        super(a, b);
+    public Plus(Expression a, double b) {
+        super(a, new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Plus(double a, Expression b) {
+        super(new Num(a), b);
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Plus(Expression a, String b) {
+        super(a, new Var(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Plus(String a, Expression b) {
+        super(new Var(a), b);
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a a double variable.
+     * @param b another double variable.
+     */
+    public Plus(double a, double b) {
+        this(new Num(a), new Num(b));
     }
 
     /**

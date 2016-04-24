@@ -2,14 +2,17 @@ package simplification;
 
 import binary.Mult;
 import binary.Plus;
-import structure.BinaryExpression;
-import structure.Expression;
-import structure.UnaryExpression;
-import tags.*;
-
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import structure.BinaryExpression;
+import structure.Expression;
+import structure.UnaryExpression;
+import tags.ExpTag;
+import tags.IntTag;
+import tags.NumTag;
+import tags.Tag;
+import tags.VarTag;
 
 /**
  * In charge of checking and applying rules to expressions.
@@ -160,7 +163,7 @@ public class RuleChecker {
      * @param rule       rule to apply.
      * @param expression expression to check.
      * @return simple expression.
-     * @throws Exception
+     * @throws Exception an exception.
      */
     public Expression apply(Rule rule, Expression expression) throws Exception {
         init();

@@ -15,19 +15,19 @@ public class Neg extends UnaryExpression implements Expression {
     /**
      * constructor.
      *
-     * @param a a double variable.
+     * @param a an expression.
      */
-    public Neg(double a) {
-        this(new Num(a));
+    public Neg(Expression a) {
+        super(a);
     }
 
     /**
      * constructor.
      *
-     * @param a an expression.
+     * @param a a double variable.
      */
-    public Neg(Expression a) {
-        super(a);
+    public Neg(double a) {
+        this(new Num(a));
     }
 
     /**
