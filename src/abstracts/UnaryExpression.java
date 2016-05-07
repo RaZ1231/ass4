@@ -1,4 +1,7 @@
-package structure;
+package abstracts;
+
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +39,15 @@ public abstract class UnaryExpression extends BaseExpression {
     }
 
     /**
+     * get left son.
+     *
+     * @return left son.
+     */
+    public Expression getA() {
+        return a;
+    }
+
+    /**
      * return assignment of sons.
      *
      * @param var        variable to replace.
@@ -60,8 +72,20 @@ public abstract class UnaryExpression extends BaseExpression {
      * @return base expression with simplified sons.
      */
     @Override
-    protected BaseExpression simplifySons() {
-        return (BaseExpression) create(getA().simplify());
+    protected Expression simplifySons() {
+        return create(getA().simplify());
+    }
+
+    /**
+     * maps son by rule
+     *
+     * @param rule said rule
+     * @return mapped son
+     * @throws Exception
+     */
+    @Override
+    protected Map<String, Expression> mapSons(Expression rule) throws Exception {
+        return ((ExtendedExpression) getA()).mapByRule(((UnaryExpression) rule).getA());
     }
 
     /**
@@ -83,15 +107,6 @@ public abstract class UnaryExpression extends BaseExpression {
      * @return operation result.
      */
     protected abstract double operate(double d);
-
-    /**
-     * get left son.
-     *
-     * @return left son.
-     */
-    public Expression getA() {
-        return a;
-    }
 
     /**
      * returns true if equals, false otherwise.

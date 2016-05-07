@@ -1,10 +1,10 @@
 package main;
 
-import simplification.Parser;
-import structure.Expression;
+import interfaces.Expression;
+import rulessimplification.Parser;
 
 /**
- * a main that demonstrates our simplification.
+ * a main that demonstrates our rulessimplification.
  *
  * @author Elisheva Broyer.
  * @since 22/04/2016.
@@ -40,8 +40,8 @@ public class SimplificationDemo {
      * @param exp an expression.
      */
     private static void printPairs(Expression exp) {
-        System.out.println(exp.toString());
-        System.out.println(exp.simplify().toString());
+        System.out.println(exp);
+        System.out.println(exp.simplify());
         System.out.println();
     }
 }

@@ -1,10 +1,11 @@
 package unary;
 
+import abstracts.UnaryExpression;
 import binary.Mult;
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
 import operands.Num;
 import operands.Var;
-import structure.Expression;
-import structure.UnaryExpression;
 
 /**
  * cos class representation.
@@ -12,16 +13,7 @@ import structure.UnaryExpression;
  * @author Elisheva Broyer.
  * @since 13/04/2016.
  */
-public class Cos extends UnaryExpression implements Expression {
-    /**
-     * constructor.
-     *
-     * @param a an expression.
-     */
-    public Cos(Expression a) {
-        super(a);
-    }
-
+public class Cos extends UnaryExpression implements ExtendedExpression {
     /**
      * constructor.
      *
@@ -34,21 +26,19 @@ public class Cos extends UnaryExpression implements Expression {
     /**
      * constructor.
      *
+     * @param a an expression.
+     */
+    public Cos(Expression a) {
+        super(a);
+    }
+
+    /**
+     * constructor.
+     *
      * @param a a string variable.
      */
     public Cos(String a) {
         this(new Var(a));
-    }
-
-    /**
-     * an operation function.
-     *
-     * @param a a parameter.
-     * @return operation result.
-     */
-    @Override
-    public double operate(double a) {
-        return Math.cos(a);
     }
 
     /**
@@ -60,6 +50,17 @@ public class Cos extends UnaryExpression implements Expression {
     @Override
     public Expression create(Expression a) {
         return new Cos(a);
+    }
+
+    /**
+     * an operation function.
+     *
+     * @param a a parameter.
+     * @return operation result.
+     */
+    @Override
+    public double operate(double a) {
+        return Math.cos(a);
     }
 
     /**

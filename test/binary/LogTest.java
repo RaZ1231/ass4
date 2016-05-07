@@ -1,11 +1,11 @@
 package binary;
 
+import interfaces.Expression;
 import operands.Const;
 import operands.Num;
 import operands.Var;
 import org.junit.Assert;
 import org.junit.Test;
-import structure.Expression;
 
 /**
  * @author Elisheva Broyer.
@@ -38,22 +38,12 @@ public class LogTest {
                         new Log(
                                 new Const("e", Math.exp(1)),
                                 new Num(4)).evaluate()
-                ));
+                )).simplify();
 
         Expression actual = a.differentiate("x").simplify();
 
         Assert.assertEquals(expected.toString(),
                 actual.toString());
-    }
-
-    @Test
-    public void simple() throws Exception {
-
-    }
-
-    @Test
-    public void toStringTest() throws Exception {
-
     }
 
 }

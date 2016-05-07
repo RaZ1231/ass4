@@ -1,7 +1,13 @@
 package tags;
 
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import interfaces.Tag;
+import operands.Num;
 import operands.Var;
-import structure.Expression;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Class represents "numeric expression expected" in rules.
@@ -9,7 +15,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 19-Apr-16.
  */
-public class NumTag extends Var implements Expression, Tag {
+public class NumTag extends Var implements ExtendedExpression, Tag {
     /**
      * constructor.
      *
@@ -30,18 +36,14 @@ public class NumTag extends Var implements Expression, Tag {
     }
 
     /**
-     * check if expression match tag type.
+     * map expression by rule for rulessimplification
      *
-     * @param expression an expression.
-     * @return true if match, false otherwise.
+     * @param rule rule to map by
+     * @return map of rule's tags
+     * @throws Exception expression is not compatible
      */
     @Override
-    public boolean check(Expression expression) {
-        try {
-            expression.evaluate();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Map<String, Expression> mapByRule(Expression rule) throws Exception {
+        return Collections.singletonMap(getValue(), (Expression) new Num(rule.evaluate()));
     }
 }

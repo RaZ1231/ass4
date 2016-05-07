@@ -1,23 +1,18 @@
-package simplification;
+package rulessimplification;
 
-import binary.Div;
-import binary.Log;
-import binary.Minus;
-import binary.Mult;
-import binary.Plus;
-import binary.Pow;
+import binary.*;
+import interfaces.Expression;
 import operands.Const;
 import operands.Num;
 import operands.Var;
 import org.junit.Test;
-import structure.Expression;
 import tags.ExpTag;
-import tags.IntTag;
 import tags.NumTag;
 import tags.VarTag;
 import unary.Cos;
 import unary.Neg;
 import unary.Sin;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -80,7 +75,7 @@ public class ParserTest {
     @Test
     public void toExpression6() throws Exception {
         Parser parser = new Parser();
-        Expression expected = new Plus(new Div(new VarTag("1"), new NumTag("2")), new IntTag("3"));
+        Expression expected = new Plus(new Div(new VarTag("1"), new NumTag("2")), new ExpTag("3"));
         String s = expected.toString();
         Expression actual = parser.toExpression(s);
 

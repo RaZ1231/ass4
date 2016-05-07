@@ -1,7 +1,12 @@
 package tags;
 
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import interfaces.Tag;
 import operands.Var;
-import structure.Expression;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Class represents "expression containing vars expected" in rules.
@@ -9,7 +14,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 19-Apr-21.
  */
-public class VarTag extends Var implements Expression, Tag {
+public class VarTag extends Var implements ExtendedExpression, Tag {
     /**
      * constructor.
      *
@@ -30,18 +35,20 @@ public class VarTag extends Var implements Expression, Tag {
     }
 
     /**
-     * check if expression match tag type.
+     * map expression by rule for rulessimplification
      *
-     * @param expression an expression.
-     * @return true if match, false otherwise.
+     * @param rule rule to map by
+     * @return map of rule's tags
+     * @throws Exception expression is not compatible
      */
     @Override
-    public boolean check(Expression expression) {
+    public Map<String, Expression> mapByRule(Expression rule) throws Exception {
         try {
-            expression.evaluate();
-            return false;
+            rule.evaluate();
         } catch (Exception e) {
-            return true;
+            return Collections.singletonMap(getValue(), rule);
         }
+
+        throw new Exception("Expression does not follow specified rule.");
     }
 }

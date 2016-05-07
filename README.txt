@@ -69,4 +69,4 @@ obeys algebraic commutative rules. While comparing the complicated pattern of th
 expression, the 'compare' method also maps the expression. For each 'tag' the method saves the expression
 in a map. If the check success, we use Expression's 'assign' method to place the expressions
 we mapped in the simple pattern of rule and return the new simplified expression.
-We use a static list of rules to contain all possible different simplification rules.
+We use a static list of rules to contain all possible different rulessimplification rules.

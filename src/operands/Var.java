@@ -1,9 +1,17 @@
 package operands;
 
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import nestedsimplification.LinearExpression;
+import nestedsimplification.LinearSequence;
+import nestedsimplification.PolynomialExpression;
+import nestedsimplification.PolynomialSequence;
+import tags.ExpTag;
+import tags.VarTag;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import structure.Expression;
 
 /**
  * variance representation class.
@@ -11,7 +19,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Var implements Expression {
+public class Var implements ExtendedExpression {
     private String value;
 
     /**
@@ -63,6 +71,24 @@ public class Var implements Expression {
     }
 
     /**
+     * map expression by rule for rulessimplification
+     *
+     * @param rule rule to map by
+     * @return map of rule's tags
+     * @throws Exception expression is not compatible
+     */
+    @Override
+    public Map<String, Expression> mapByRule(Expression rule) throws Exception {
+        if (rule instanceof ExpTag) {
+            return Collections.singletonMap(((ExpTag) rule).getValue(), (Expression) this);
+        } else if (rule instanceof VarTag) {
+            return Collections.singletonMap(((VarTag) rule).getValue(), (Expression) this);
+        } else {
+            throw new Exception("Expression does not follow specified rule.");
+        }
+    }
+
+    /**
      * evaluate the expression using the variable values provided
      * in the assignment, and return the result.  If the expression
      * contains a variable which is not in the assignment, an exception
@@ -82,6 +108,16 @@ public class Var implements Expression {
     }
 
     /**
+     * get list of expressions that are connected by linear operations
+     *
+     * @return the list
+     */
+    @Override
+    public LinearSequence getLinearVariables() {
+        return LinearSequence.singletonList(new LinearExpression(this));
+    }
+
+    /**
      * a convenience method. Similar to `evaluate(assignment)` method above,
      * but uses an empty assignment.
      *
@@ -91,6 +127,16 @@ public class Var implements Expression {
     @Override
     public double evaluate() throws Exception {
         return evaluate(null);
+    }
+
+    /**
+     * get list of expressions that are connected by linear operations
+     *
+     * @return the list
+     */
+    @Override
+    public PolynomialSequence getPolynomialVariables() {
+        return PolynomialSequence.singletonList(new PolynomialExpression(this));
     }
 
     /**
@@ -146,4 +192,6 @@ public class Var implements Expression {
             return new Num(0);
         }
     }
+
+
 }

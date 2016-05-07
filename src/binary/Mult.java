@@ -1,9 +1,11 @@
 package binary;
 
+import abstracts.CommutativeExpression;
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import nestedsimplification.PolynomialSequence;
 import operands.Num;
 import operands.Var;
-import structure.BinaryExpression;
-import structure.Expression;
 
 /**
  * Multiple representation class.
@@ -11,15 +13,15 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Mult extends BinaryExpression implements Expression {
+public class Mult extends CommutativeExpression implements ExtendedExpression {
     /**
      * constructor.
      *
      * @param a an expression.
      * @param b another expression.
      */
-    public Mult(Expression a, Expression b) {
-        super(a, b);
+    public Mult(Expression a, double b) {
+        super(new Num(b), a);
     }
 
     /**
@@ -28,8 +30,18 @@ public class Mult extends BinaryExpression implements Expression {
      * @param a an expression.
      * @param b another expression.
      */
-    public Mult(Expression a, double b) {
-        super(a, new Num(b));
+    public Mult(String a, Num b) {
+        super(b, new Var(a));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Mult(String a, double b) {
+        super(new Num(b), new Var(a));
     }
 
     /**
@@ -75,6 +87,16 @@ public class Mult extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Mult(Expression a, Num b) {
+        super(b, a);
+    }
+
+    /**
+     * constructor.
+     *
      * @param a a double variable.
      * @param b a string variable.
      */
@@ -85,11 +107,11 @@ public class Mult extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
-     * @param a a string variable.
-     * @param b a double variable.
+     * @param a an expression.
+     * @param b another expression.
      */
-    public Mult(String a, double b) {
-        this(new Var(a), new Num(b));
+    public Mult(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**
@@ -146,5 +168,20 @@ public class Mult extends BinaryExpression implements Expression {
     @Override
     public String toString() {
         return "(" + getA() + " * " + getB() + ")";
+    }
+
+    /**
+     * get list of expressions that are connected by polynomial operations
+     *
+     * @return the list
+     */
+    @Override
+    public PolynomialSequence getPolynomialVariables() {
+        PolynomialSequence vars = new PolynomialSequence();
+
+        vars.addAll(((ExtendedExpression) getA()).getPolynomialVariables());
+        vars.addAll(((ExtendedExpression) getB()).getPolynomialVariables());
+
+        return vars;
     }
 }

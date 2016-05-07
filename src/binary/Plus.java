@@ -1,9 +1,11 @@
 package binary;
 
+import abstracts.CommutativeExpression;
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import nestedsimplification.LinearSequence;
 import operands.Num;
 import operands.Var;
-import structure.BinaryExpression;
-import structure.Expression;
 
 /**
  * Plus representation class.
@@ -11,17 +13,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Plus extends BinaryExpression implements Expression {
-    /**
-     * constructor.
-     *
-     * @param a an expression.
-     * @param b another expression.
-     */
-    public Plus(Expression a, Expression b) {
-        super(a, b);
-    }
-
+public class Plus extends CommutativeExpression implements ExtendedExpression {
     /**
      * constructor.
      *
@@ -70,6 +62,16 @@ public class Plus extends BinaryExpression implements Expression {
      */
     public Plus(double a, double b) {
         this(new Num(a), new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Plus(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**
@@ -145,5 +147,20 @@ public class Plus extends BinaryExpression implements Expression {
     @Override
     public String toString() {
         return "(" + getA() + " + " + getB() + ")";
+    }
+
+    /**
+     * get list of expressions that are connected by linear operations
+     *
+     * @return the list
+     */
+    @Override
+    public LinearSequence getLinearVariables() {
+        LinearSequence vars = new LinearSequence();
+
+        vars.addAll(((ExtendedExpression) getA()).getLinearVariables());
+        vars.addAll(((ExtendedExpression) getB()).getLinearVariables());
+
+        return vars;
     }
 }

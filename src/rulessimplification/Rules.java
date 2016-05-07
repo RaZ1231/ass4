@@ -1,36 +1,22 @@
-package simplification;
+package rulessimplification;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Contains rules list.
+ * Contains list of rules for simplifications.
  *
  * @author Raziel Solomon
  * @since 20-Apr-16.
  */
 public class Rules {
     private static List<Rule> rules;
-    private static boolean isInit = false;
-
-    /**
-     * returns list of rules.
-     *
-     * @return list of rules.
-     */
-    public List<Rule> getRules() {
-        if (!isInit) {
-            init();
-        }
-        return rules;
-    }
 
     /**
      * initialized list of rules to compare with.
      */
-    private void init() {
-        isInit = true;
-        rules = new ArrayList<>(); //list of rules
+    static {
+        rules = new LinkedList<Rule>(); //int
         //Simple rules
         rules.add(new Rule("(#1 + 0)", "#1"));
         rules.add(new Rule("(#1 - 0)", "#1"));
@@ -49,6 +35,7 @@ public class Rules {
         rules.add(new Rule("(0^#1)", "0"));
 
         //Complex rules
+        rules.add(new Rule("((-1) * #1)", "(-#1)"));
         rules.add(new Rule("(-(-#1))", "#1"));
         rules.add(new Rule("(#1 + (-#2))", "(#1 - #2)"));
         rules.add(new Rule("(#1 - (-#2))", "(#1 + #2)"));
@@ -58,8 +45,10 @@ public class Rules {
         rules.add(new Rule("((-#1) / (-#2))", "(#1 / #2)"));
         rules.add(new Rule("(#1 + #1)", "(2 * #1)"));
         rules.add(new Rule("((@1 * #2) + #2)", "((@1 + 1) * #2)"));
+        rules.add(new Rule("((@1 * #2) - #2)", "((@1 - 1) * #2)"));
+        rules.add(new Rule("(#2 - (@1 * #2))", "((1 - @1) * #2)"));
         rules.add(new Rule("((@1 * #2) + (@3 * #2))", "((@1 + @3) * #2)"));
-        rules.add(new Rule("(@1 + (@2 + &3))", "((@1 + @2) + &3)"));
+        rules.add(new Rule("((@1 * #2) - (@3 * #2))", "((@1 - @3) * #2)"));
         rules.add(new Rule("((@1 * #2) + (#3 + (@4 * #2)))", "(((@1 + @4) * #2) + #3)"));
         rules.add(new Rule("(#1 * #1)", "(#1^2)"));
         rules.add(new Rule("(#1 * (#1^#2))", "(#1^(1 + #2))"));
@@ -90,6 +79,19 @@ public class Rules {
         rules.add(new Rule("cos(pi - #1)", "(-cos(#1))"));
         rules.add(new Rule("sin((-#1))", "(-sin(#1))"));
         rules.add(new Rule("cos((-#1))", "cos(#1)"));
+        rules.add(new Rule("(@1 * (@2 * &3))", "((@1 * @2) * &3)"));
+        rules.add(new Rule("(@1 * (-&2))", "((-@1) * &2))"));
+        rules.add(new Rule("(#1 * (#2 / #1))", "#2"));
+        rules.add(new Rule("(#1 * (#2 / #3))", "((#1 * #2) / #3)"));
 
+    }
+
+    /**
+     * returns list of rules.
+     *
+     * @return list of rules.
+     */
+    public static List<Rule> getRules() {
+        return rules;
     }
 }

@@ -1,10 +1,11 @@
 package binary;
 
+import abstracts.BinaryExpression;
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
 import operands.Const;
 import operands.Num;
 import operands.Var;
-import structure.BinaryExpression;
-import structure.Expression;
 
 /**
  * Pow representation class.
@@ -12,17 +13,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Pow extends BinaryExpression implements Expression {
-    /**
-     * constructor.
-     *
-     * @param a an expression.
-     * @param b another expression.
-     */
-    public Pow(Expression a, Expression b) {
-        super(a, b);
-    }
-
+public class Pow extends BinaryExpression implements ExtendedExpression {
     /**
      * constructor.
      *
@@ -76,6 +67,16 @@ public class Pow extends BinaryExpression implements Expression {
     /**
      * constructor.
      *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Pow(Expression a, Expression b) {
+        super(a, b);
+    }
+
+    /**
+     * constructor.
+     *
      * @param a a double variable.
      * @param b a string variable.
      */
@@ -114,18 +115,6 @@ public class Pow extends BinaryExpression implements Expression {
     }
 
     /**
-     * an operation function.
-     *
-     * @param a a parameter.
-     * @param b another parameter.
-     * @return operation result.
-     */
-    @Override
-    public double operate(double a, double b) {
-        return Math.pow(a, b);
-    }
-
-    /**
      * returns new expression by type.
      *
      * @param a an expression.
@@ -135,6 +124,18 @@ public class Pow extends BinaryExpression implements Expression {
     @Override
     public Expression create(Expression a, Expression b) {
         return new Pow(a, b);
+    }
+
+    /**
+     * an operation function.
+     *
+     * @param a a parameter.
+     * @param b another parameter.
+     * @return operation result.
+     */
+    @Override
+    public double operate(double a, double b) {
+        return Math.pow(a, b);
     }
 
     /**

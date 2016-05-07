@@ -1,6 +1,8 @@
-package simplification;
+package rulessimplification;
 
-import structure.Expression;
+import interfaces.Expression;
+
+import java.util.Map;
 
 /**
  * Representation of rule.
@@ -43,6 +45,28 @@ public class Rule {
      */
     public Expression getComplicated() {
         return complicated;
+    }
+
+    @Override
+    public String toString() {
+        return complicated + " -> " + simple;
+    }
+
+    /**
+     * replace tags in simple expression with map tags.
+     *
+     * @param tags simple form of rule.
+     * @return simple expression.
+     */
+
+    public Expression applyByMap(Map<String, Expression> tags) {
+        Expression simpleExpression = getSimple();
+
+        for (Map.Entry<String, Expression> tag : tags.entrySet()) {
+            simpleExpression = simpleExpression.assign(tag.getKey(), tag.getValue());
+        }
+
+        return simpleExpression;
     }
 
     /**

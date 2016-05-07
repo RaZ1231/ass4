@@ -3,11 +3,12 @@ package main;
 import binary.Mult;
 import binary.Plus;
 import binary.Pow;
+import interfaces.Expression;
+import operands.Const;
+import unary.Sin;
+
 import java.util.Map;
 import java.util.TreeMap;
-import operands.Const;
-import structure.Expression;
-import unary.Sin;
 
 /**
  * Testing assignment.

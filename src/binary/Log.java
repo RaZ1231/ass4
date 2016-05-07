@@ -1,10 +1,11 @@
 package binary;
 
+import abstracts.BinaryExpression;
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
 import operands.Const;
 import operands.Num;
 import operands.Var;
-import structure.BinaryExpression;
-import structure.Expression;
 
 /**
  * Log representation class.
@@ -12,17 +13,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Log extends BinaryExpression implements Expression {
-    /**
-     * constructor.
-     *
-     * @param a an expression.
-     * @param b another expression.
-     */
-    public Log(Expression a, Expression b) {
-        super(a, b);
-    }
-
+public class Log extends BinaryExpression implements ExtendedExpression {
     /**
      * constructor.
      *
@@ -71,6 +62,16 @@ public class Log extends BinaryExpression implements Expression {
      */
     public Log(double a, double b) {
         this(new Num(a), new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Log(Expression a, Expression b) {
+        super(a, b);
     }
 
     /**

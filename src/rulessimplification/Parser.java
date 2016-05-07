@@ -1,17 +1,11 @@
-package simplification;
+package rulessimplification;
 
-import binary.Div;
-import binary.Log;
-import binary.Minus;
-import binary.Mult;
-import binary.Plus;
-import binary.Pow;
+import binary.*;
+import interfaces.Expression;
 import operands.Const;
 import operands.Num;
 import operands.Var;
-import structure.Expression;
 import tags.ExpTag;
-import tags.IntTag;
 import tags.NumTag;
 import tags.VarTag;
 import unary.Cos;
@@ -40,7 +34,7 @@ public class Parser {
             } else if (s.length() > 1 && s.charAt(1) == '-') {
                 return getExpression(s, 1);
             } else {
-                return getExpression(s, getExternalOperand(s));
+                return getExpression(s, getExternalOperator(s));
             }
         }
     }
@@ -74,7 +68,7 @@ public class Parser {
      * @param s string to search in.
      * @return index of operator.
      */
-    private Integer getExternalOperand(String s) {
+    private Integer getExternalOperator(String s) {
         int brackets = 0;
         int minBrackets = s.length();
         Integer minIndex = 0;
@@ -113,7 +107,7 @@ public class Parser {
      *
      * @param s     string to operate on.
      * @param index external operator.
-     * @return expression on toExpression(string).
+     * @return expression on toBaseExpression(string).
      */
     private Expression getExpression(String s, int index) {
         switch (s.charAt(index)) {
@@ -138,8 +132,6 @@ public class Parser {
                 return new ExpTag(s.substring(1));
             case '@':
                 return new NumTag(s.substring(1));
-            case '%':
-                return new IntTag(s.substring(1));
             case '&':
                 return new VarTag(s.substring(1));
             case 'l':

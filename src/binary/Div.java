@@ -1,9 +1,11 @@
 package binary;
 
+import abstracts.BinaryExpression;
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import nestedsimplification.PolynomialSequence;
 import operands.Num;
 import operands.Var;
-import structure.BinaryExpression;
-import structure.Expression;
 
 /**
  * Divide representation class.
@@ -11,17 +13,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 11-Apr-16.
  */
-public class Div extends BinaryExpression implements Expression {
-    /**
-     * constructor.
-     *
-     * @param a an expression.
-     * @param b another expression.
-     */
-    public Div(Expression a, Expression b) {
-        super(a, b);
-    }
-
+public class Div extends BinaryExpression implements ExtendedExpression {
     /**
      * constructor.
      *
@@ -70,6 +62,16 @@ public class Div extends BinaryExpression implements Expression {
      */
     public Div(double a, double b) {
         this(new Num(a), new Num(b));
+    }
+
+    /**
+     * constructor.
+     *
+     * @param a an expression.
+     * @param b another expression.
+     */
+    public Div(Expression a, Expression b) {
+        super(a, b);
     }
 
 
@@ -150,5 +152,20 @@ public class Div extends BinaryExpression implements Expression {
     @Override
     public String toString() {
         return "(" + getA() + " / " + getB() + ")";
+    }
+
+    /**
+     * get list of expressions that are connected by polynomial operations
+     *
+     * @return the list
+     */
+    @Override
+    public PolynomialSequence getPolynomialVariables() {
+        PolynomialSequence vars = new PolynomialSequence();
+
+        vars.addAll(((ExtendedExpression) getA()).getPolynomialVariables());
+        vars.addAll(((ExtendedExpression) getB()).getPolynomialVariables().negate());
+
+        return vars;
     }
 }

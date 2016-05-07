@@ -1,7 +1,12 @@
 package tags;
 
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+import interfaces.Tag;
 import operands.Var;
-import structure.Expression;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Class represents "all expression expected" in rules.
@@ -9,7 +14,7 @@ import structure.Expression;
  * @author Raziel Solomon
  * @since 18-Apr-16.
  */
-public class ExpTag extends Var implements Expression, Tag {
+public class ExpTag extends Var implements ExtendedExpression, Tag {
     /**
      * constructor.
      *
@@ -30,13 +35,14 @@ public class ExpTag extends Var implements Expression, Tag {
     }
 
     /**
-     * check if expression match tag type.
+     * map expression by rule for rulessimplification
      *
-     * @param e an expression.
-     * @return true if match, false otherwise.
+     * @param rule rule to map by
+     * @return map of rule's tags
+     * @throws Exception expression is not compatible
      */
     @Override
-    public boolean check(Expression e) {
-        return true;
+    public Map<String, Expression> mapByRule(Expression rule) throws Exception {
+        return Collections.singletonMap(getValue(), rule);
     }
 }

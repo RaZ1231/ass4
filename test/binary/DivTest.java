@@ -1,6 +1,8 @@
 package binary;
 
+import interfaces.Expression;
 import operands.Num;
+import operands.Var;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,14 +36,6 @@ public class DivTest {
     }
 
     @Test
-    public void simple() throws Exception {
-        String expected = "x";
-        String actual = new Div("x", 1).simple().toString();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void simplify() throws Exception {
         String expected = "0.25";
         String actual = new Div(4, 16).simplify().toString();
@@ -50,8 +44,13 @@ public class DivTest {
     }
 
     @Test
-    public void toStringTest() throws Exception {
+    public void simplify1() throws Exception {
+        Div div = new Div("x", 1);
 
+        Expression expected = new Var("x");
+        Expression actual = div.rulesSimplification();
+
+        Assert.assertEquals(expected, actual);
     }
 
 }

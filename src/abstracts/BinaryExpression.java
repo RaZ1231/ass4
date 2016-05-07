@@ -1,5 +1,9 @@
-package structure;
+package abstracts;
 
+import interfaces.Expression;
+import interfaces.ExtendedExpression;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -83,8 +87,23 @@ public abstract class BinaryExpression extends BaseExpression {
      * @return base expression with simplified sons.
      */
     @Override
-    protected BaseExpression simplifySons() {
-        return (BaseExpression) create(getA().simplify(), getB().simplify());
+    protected Expression simplifySons() {
+        return create(getA().simplify(), getB().simplify());
+    }
+
+    /**
+     * maps sons and combine maps
+     *
+     * @param rule said rule
+     * @return
+     * @throws Exception
+     */
+    @Override
+    protected Map<String, Expression> mapSons(Expression rule) throws Exception {
+        Map<String, Expression> aMap = ((ExtendedExpression) getA()).mapByRule(((BinaryExpression) rule).getA());
+        Map<String, Expression> bMap = ((ExtendedExpression) getB()).mapByRule(((BinaryExpression) rule).getB());
+
+        return combineMaps(aMap, bMap);
     }
 
     /**
@@ -107,6 +126,42 @@ public abstract class BinaryExpression extends BaseExpression {
      * @return operation result.
      */
     protected abstract double operate(double d1, double d2);
+
+    /**
+     * combine two maps and checking if their keys and values match
+     *
+     * @param aMap map
+     * @param bMap other map
+     * @return combined map
+     * @throws Exception
+     */
+    protected Map<String, Expression> combineMaps(Map<String, Expression> aMap, Map<String, Expression> bMap)
+            throws Exception {
+        if (aMap == null) {
+            return bMap;
+        } else if (bMap == null) {
+            return aMap;
+        }
+
+
+        Map<String, Expression> newMap = new HashMap<>();
+
+        for (Map.Entry<String, Expression> entry : aMap.entrySet()) {
+            newMap.put(entry.getKey(), entry.getValue());
+        }
+
+        for (Map.Entry<String, Expression> entry : bMap.entrySet()) {
+            if (newMap.containsKey(entry.getKey())) {
+                if (!entry.getValue().equals(newMap.get(entry.getKey()))) {
+                    throw new Exception("Expression does not follow specified rule.");
+                }
+            } else {
+                newMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        return newMap;
+    }
 
     /**
      * returns true if equals, false otherwise.
