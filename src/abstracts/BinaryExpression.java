@@ -2,7 +2,6 @@ package abstracts;
 
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -92,11 +91,11 @@ public abstract class BinaryExpression extends BaseExpression {
     }
 
     /**
-     * maps sons and combine maps
+     * maps sons and combine maps.
      *
-     * @param rule said rule
-     * @return
-     * @throws Exception
+     * @param rule said rule.
+     * @return combined maps.
+     * @throws Exception an exception.
      */
     @Override
     protected Map<String, Expression> mapSons(Expression rule) throws Exception {
@@ -128,12 +127,12 @@ public abstract class BinaryExpression extends BaseExpression {
     protected abstract double operate(double d1, double d2);
 
     /**
-     * combine two maps and checking if their keys and values match
+     * combine two maps and checking if their keys and values match.
      *
-     * @param aMap map
-     * @param bMap other map
-     * @return combined map
-     * @throws Exception
+     * @param aMap map.
+     * @param bMap other map.
+     * @return combined map.
+     * @throws Exception an exception.
      */
     protected Map<String, Expression> combineMaps(Map<String, Expression> aMap, Map<String, Expression> bMap)
             throws Exception {

@@ -2,6 +2,8 @@ package abstracts;
 
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
+import java.util.Collections;
+import java.util.Map;
 import nestedsimplification.LinearExpression;
 import nestedsimplification.LinearSequence;
 import nestedsimplification.PolynomialExpression;
@@ -12,9 +14,6 @@ import rulessimplification.Rules;
 import tags.ExpTag;
 import tags.NumTag;
 import tags.VarTag;
-
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * base expression class representation.
@@ -35,6 +34,7 @@ public abstract class BaseExpression {
             try {
                 simple = ((BaseExpression) simple).simplifySons();
             } catch (Exception ignored) {
+                continue;
             }
 
             try {
@@ -63,15 +63,15 @@ public abstract class BaseExpression {
     /**
      * Simplifies sons of base expression.
      *
-     * @return base expression with simplified sons
+     * @return base expression with simplified sons.
      */
     protected abstract Expression simplifySons();
 
     /**
-     * iterate over rules to find a match for rulessimplification
+     * iterate over rules to find a match for rulessimplification.
      *
-     * @return simplified expression
-     * @throws Exception
+     * @return simplified expression.
+     * @throws Exception an exception.
      */
     public Expression rulesSimplification() throws Exception {
         Map<String, Expression> tags;
@@ -82,6 +82,7 @@ public abstract class BaseExpression {
 
                 return rule.applyByMap(tags);
             } catch (Exception ignored) {
+                continue;
             }
         }
 
@@ -89,10 +90,10 @@ public abstract class BaseExpression {
     }
 
     /**
-     * initiate linear rulessimplification
+     * initiate linear rulessimplification.
      *
-     * @return simplified expression
-     * @throws Exception
+     * @return simplified expression.
+     * @throws Exception an exception.
      */
     private Expression linearSimplification() throws Exception {
         LinearSequence expressions = new LinearSequence();
@@ -103,10 +104,10 @@ public abstract class BaseExpression {
     }
 
     /**
-     * initiate polynomial rulessimplification
+     * initiate polynomial rulessimplification.
      *
-     * @return simplified expression
-     * @throws Exception
+     * @return simplified expression.
+     * @throws Exception an exception.
      */
     private Expression polynomialSimplification() throws Exception {
         PolynomialSequence expressions = new PolynomialSequence();
@@ -117,11 +118,11 @@ public abstract class BaseExpression {
     }
 
     /**
-     * map expression by rule for rulessimplification
+     * map expression by rule for rulessimplification.
      *
-     * @param rule rule to map by
-     * @return map of rule's tags
-     * @throws Exception expression is not compatible
+     * @param rule rule to map by.
+     * @return map of rule's tags.
+     * @throws Exception expression is not compatible.
      */
     public Map<String, Expression> mapByRule(Expression rule) throws Exception {
         if (rule instanceof ExpTag) {
@@ -143,18 +144,18 @@ public abstract class BaseExpression {
     }
 
     /**
-     * get list of expressions that are connected by linear operations
+     * get list of expressions that are connected by linear operations.
      *
-     * @return the list
+     * @return the list.
      */
     public LinearSequence getLinearVariables() {
         return LinearSequence.singletonList(new LinearExpression((ExtendedExpression) this));
     }
 
     /**
-     * get list of expressions that are connected by polynomial operations
+     * get list of expressions that are connected by polynomial operations.
      *
-     * @return the list
+     * @return the list.
      */
     public PolynomialSequence getPolynomialVariables() {
         return PolynomialSequence.singletonList(new PolynomialExpression((ExtendedExpression) this));
@@ -172,11 +173,11 @@ public abstract class BaseExpression {
     }
 
     /**
-     * map sons by rule
+     * map sons by rule.
      *
-     * @param rule said rule
-     * @return mapped expression
-     * @throws Exception
+     * @param rule said rule.
+     * @return mapped expression.
+     * @throws Exception an exception.
      */
     protected abstract Map<String, Expression> mapSons(Expression rule) throws Exception;
 

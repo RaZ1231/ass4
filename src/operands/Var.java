@@ -2,16 +2,15 @@ package operands;
 
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import nestedsimplification.LinearExpression;
 import nestedsimplification.LinearSequence;
 import nestedsimplification.PolynomialExpression;
 import nestedsimplification.PolynomialSequence;
 import tags.ExpTag;
 import tags.VarTag;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 /**
  * variance representation class.
@@ -54,7 +53,7 @@ public class Var implements ExtendedExpression {
     /**
      * returns a nice string representation of the expression.
      *
-     * @return string representation
+     * @return string representation.
      */
     @Override
     public String toString() {
@@ -71,11 +70,11 @@ public class Var implements ExtendedExpression {
     }
 
     /**
-     * map expression by rule for rulessimplification
+     * map expression by rule for rulessimplification.
      *
-     * @param rule rule to map by
-     * @return map of rule's tags
-     * @throws Exception expression is not compatible
+     * @param rule rule to map by.
+     * @return map of rule's tags.
+     * @throws Exception expression is not compatible.
      */
     @Override
     public Map<String, Expression> mapByRule(Expression rule) throws Exception {
@@ -94,8 +93,8 @@ public class Var implements ExtendedExpression {
      * contains a variable which is not in the assignment, an exception
      * is thrown.
      *
-     * @param assignment variables' values to assign
-     * @return equation solution for the assignment
+     * @param assignment variables' values to assign.
+     * @return equation solution for the assignment.
      * @throws Exception an exception.
      */
     @Override
@@ -108,9 +107,9 @@ public class Var implements ExtendedExpression {
     }
 
     /**
-     * get list of expressions that are connected by linear operations
+     * get list of expressions that are connected by linear operations.
      *
-     * @return the list
+     * @return the list.
      */
     @Override
     public LinearSequence getLinearVariables() {
@@ -121,7 +120,7 @@ public class Var implements ExtendedExpression {
      * a convenience method. Similar to `evaluate(assignment)` method above,
      * but uses an empty assignment.
      *
-     * @return equation solution
+     * @return equation solution.
      * @throws Exception an exception.
      */
     @Override
@@ -130,9 +129,9 @@ public class Var implements ExtendedExpression {
     }
 
     /**
-     * get list of expressions that are connected by linear operations
+     * get list of expressions that are connected by linear operations.
      *
-     * @return the list
+     * @return the list.
      */
     @Override
     public PolynomialSequence getPolynomialVariables() {
@@ -154,9 +153,9 @@ public class Var implements ExtendedExpression {
      * var are replaced with the provided expression (Does not modify the
      * current expression).
      *
-     * @param var        variable to replace
-     * @param expression expression to put instead
-     * @return modified expression
+     * @param var        variable to replace.
+     * @param expression expression to put instead.
+     * @return modified expression.
      */
     @Override
     public Expression assign(String var, Expression expression) {
@@ -170,7 +169,7 @@ public class Var implements ExtendedExpression {
     /**
      * returned a simplified version of the current expression.
      *
-     * @return simplified expression
+     * @return simplified expression.
      */
     @Override
     public Expression simplify() {
@@ -192,6 +191,4 @@ public class Var implements ExtendedExpression {
             return new Num(0);
         }
     }
-
-
 }

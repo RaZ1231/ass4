@@ -9,7 +9,7 @@ import interfaces.ExtendedExpression;
 import unary.Neg;
 
 /**
- * Class contains an expression and its sign
+ * Class contains an expression and its sign.
  *
  * @author Raziel Solomon
  * @since 06-May-16.
@@ -19,19 +19,19 @@ public class LinearExpression implements NestedExpression {
     private boolean isPositive;
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param expression positive expression
+     * @param expression positive expression.
      */
     public LinearExpression(ExtendedExpression expression) {
         this(expression, true);
     }
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param expression the expression
-     * @param isPositive the sign
+     * @param expression the expression.
+     * @param isPositive the sign.
      */
     public LinearExpression(ExtendedExpression expression, boolean isPositive) {
         this.expression = expression;
@@ -39,9 +39,9 @@ public class LinearExpression implements NestedExpression {
     }
 
     /**
-     * string representation
+     * string representation.
      *
-     * @return string
+     * @return string.
      */
     @Override
     public String toString() {
@@ -53,25 +53,25 @@ public class LinearExpression implements NestedExpression {
     }
 
     /**
-     * get the expression
+     * get the expression.
      *
-     * @return expression
+     * @return expression.
      */
     public ExtendedExpression getExpression() {
         return expression;
     }
 
     /**
-     * check sign
+     * check sign.
      *
-     * @return true - positive/false - negative
+     * @return true - positive/false - negative.
      */
     public boolean isPositive() {
         return isPositive;
     }
 
     /**
-     * flip sign
+     * flip sign.
      */
     public void negate() {
         isPositive = !isPositive;
@@ -79,9 +79,9 @@ public class LinearExpression implements NestedExpression {
 
 
     /**
-     * return signed expression
+     * return signed expression.
      *
-     * @return signed expression
+     * @return signed expression.
      */
     public Expression toExpression() {
         if (isPositive()) {
@@ -92,10 +92,10 @@ public class LinearExpression implements NestedExpression {
     }
 
     /**
-     * combine two expressions
+     * combine two expressions.
      *
-     * @param other expression
-     * @return combined (binary) expression
+     * @param other expression.
+     * @return combined (binary) expression.
      */
     public BaseExpression toBaseExpression(NestedExpression other) {
         try {

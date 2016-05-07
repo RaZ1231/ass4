@@ -150,9 +150,9 @@ public class Minus extends BinaryExpression implements ExtendedExpression {
     }
 
     /**
-     * get list of expressions that are connected by linear operations
+     * get list of expressions that are connected by linear operations.
      *
-     * @return the list
+     * @return the list.
      */
     @Override
     public LinearSequence getLinearVariables() {

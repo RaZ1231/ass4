@@ -2,13 +2,12 @@ package abstracts;
 
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
-import operands.Num;
-
 import java.util.ArrayList;
 import java.util.List;
+import operands.Num;
 
 /**
- * Class contains shared code between collections of nested expressions
+ * Class contains shared code between collections of nested expressions.
  *
  * @author Raziel Solomon
  * @since 07-May-16.
@@ -17,45 +16,45 @@ public abstract class NestedSequence {
     private List<NestedExpression> expressions;
 
     /**
-     * constructor
+     * constructor.
      */
     public NestedSequence() {
         expressions = new ArrayList<>();
     }
 
     /**
-     * add expression
+     * add expression.
      *
-     * @param expression new expression
+     * @param expression new expression.
      */
     public void add(NestedExpression expression) {
         expressions.add(expression);
     }
 
     /**
-     * add expressions list
+     * add expressions list.
      *
-     * @param expression expressions list
+     * @param expression expressions list.
      */
     public void addAll(NestedSequence expression) {
         expressions.addAll(expression.getExpressions());
     }
 
     /**
-     * get expressions list
+     * get expressions list.
      *
-     * @return expressions list
+     * @return expressions list.
      */
     public List<NestedExpression> getExpressions() {
         return expressions;
     }
 
     /**
-     * return a subList of expressions
+     * return a subList of expressions.
      *
-     * @param from start
-     * @param to   end
-     * @return subList
+     * @param from start.
+     * @param to   end.
+     * @return subList.
      */
     public NestedSequence subList(int from, int to) {
         expressions = getExpressions().subList(from, to);
@@ -64,25 +63,25 @@ public abstract class NestedSequence {
     }
 
     /**
-     * negate every expression in list
+     * negate every expression in list.
      *
-     * @return negated list
+     * @return negated list.
      */
     public NestedSequence negate() {
-        NestedSequence expressions = this;
+        NestedSequence nestedSequence = this;
 
-        for (NestedExpression expression : expressions.getExpressions()) {
+        for (NestedExpression expression : nestedSequence.getExpressions()) {
             expression.negate();
         }
 
-        return expressions;
+        return nestedSequence;
     }
 
     /**
-     * try to combine expression by rules and evaluations
+     * try to combine expression by rules and evaluations.
      *
-     * @return simplified expression
-     * @throws Exception
+     * @return simplified expression.
+     * @throws Exception an exception.
      */
     public Expression simplify() throws Exception {
         boolean isSimplified = false;
@@ -103,6 +102,7 @@ public abstract class NestedSequence {
                     isSimplified = true;
 
                 } catch (Exception ignored) {
+                    continue;
                 }
             }
         }
@@ -115,48 +115,53 @@ public abstract class NestedSequence {
     }
 
     /**
-     * get size
+     * get size.
      *
-     * @return size
+     * @return size.
      */
     public int size() {
         return getExpressions().size();
     }
 
     /**
-     * get ith expression
+     * get ith expression.
      *
-     * @param i place
-     * @return ith expression
+     * @param i place.
+     * @return i'th expression.
      */
     public NestedExpression get(int i) {
         return getExpressions().get(i);
     }
 
     /**
-     * set ith expression
+     * set ith expression.
      *
-     * @param i          place
-     * @param expression new expression
+     * @param i          place.
+     * @param expression new expression.
      */
     public void set(int i, NestedExpression expression) {
         expressions.set(i, expression);
     }
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param expression for constructor
-     * @return new nested expression
+     * @param expression for constructor.
+     * @return new nested expression.
      */
     public abstract NestedExpression create(ExtendedExpression expression);
 
+    /**
+     * returns neutral number.
+     *
+     * @return neutral number.
+     */
     public abstract NestedExpression getNeutralNum();
 
     /**
-     * convert list to expression
+     * convert list to expression.
      *
-     * @return expression
+     * @return expression.
      */
     public abstract Expression toExpression();
 }

@@ -171,9 +171,9 @@ public class Mult extends CommutativeExpression implements ExtendedExpression {
     }
 
     /**
-     * get list of expressions that are connected by polynomial operations
+     * get list of expressions that are connected by polynomial operations.
      *
-     * @return the list
+     * @return the list.
      */
     @Override
     public PolynomialSequence getPolynomialVariables() {

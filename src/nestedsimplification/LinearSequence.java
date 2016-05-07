@@ -8,17 +8,17 @@ import interfaces.ExtendedExpression;
 import operands.Num;
 
 /**
- * List of nested expression connected by plus/minus/neg
+ * List of nested expression connected by plus/minus/neg.
  *
  * @author Raziel Solomon
  * @since 07-May-16.
  */
 public class LinearSequence extends NestedSequence {
     /**
-     * convenience method to return a list with a single item
+     * convenience method to return a list with a single item.
      *
-     * @param expression item
-     * @return list
+     * @param expression item.
+     * @return list.
      */
     public static LinearSequence singletonList(LinearExpression expression) {
         LinearSequence list = new LinearSequence();
@@ -29,10 +29,10 @@ public class LinearSequence extends NestedSequence {
     }
 
     /**
-     * create new list
+     * create new list.
      *
-     * @param expression for constructor
-     * @return new list
+     * @param expression for constructor.
+     * @return new list.
      */
     @Override
     public NestedExpression create(ExtendedExpression expression) {
@@ -40,9 +40,9 @@ public class LinearSequence extends NestedSequence {
     }
 
     /**
-     * returns a plus - neutral number
+     * returns a plus - neutral number.
      *
-     * @return new num
+     * @return new num.
      */
     @Override
     public NestedExpression getNeutralNum() {
@@ -50,9 +50,9 @@ public class LinearSequence extends NestedSequence {
     }
 
     /**
-     * convert list to expression
+     * convert list to expression.
      *
-     * @return expression
+     * @return expression.
      */
     @Override
     public Expression toExpression() {

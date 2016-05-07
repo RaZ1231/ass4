@@ -23,7 +23,7 @@ public class SimplificationDemo {
 
         expressions[1] = p.toExpression("((cos(pi) * ((y^4.0) / y)) - (-((-1.0) - 0.0)))");
 
-        expressions[2] = p.toExpression("log(((0.0 + y) - 0.0), (y^8.0))");
+        expressions[2] = p.toExpression("(log((x + y), (15 / x)) + log((x + y), x))");
 
         expressions[3] = p.toExpression("((x / 3.0) + (5.0 / y))");
 

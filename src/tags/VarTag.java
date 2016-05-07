@@ -35,11 +35,11 @@ public class VarTag extends Var implements ExtendedExpression, Tag {
     }
 
     /**
-     * map expression by rule for rulessimplification
+     * map expression by rule for rulessimplification.
      *
-     * @param rule rule to map by
-     * @return map of rule's tags
-     * @throws Exception expression is not compatible
+     * @param rule rule to map by.
+     * @return map of rule's tags.
+     * @throws Exception expression is not compatible.
      */
     @Override
     public Map<String, Expression> mapByRule(Expression rule) throws Exception {

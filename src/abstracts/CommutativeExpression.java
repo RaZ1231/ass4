@@ -2,11 +2,10 @@ package abstracts;
 
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
-
 import java.util.Map;
 
 /**
- * Binary Expression that is commutative
+ * Binary Expression that is commutative.
  *
  * @author Raziel Solomon
  * @since 06-May-16.
@@ -23,11 +22,11 @@ public abstract class CommutativeExpression extends BinaryExpression {
     }
 
     /**
-     * map sons commutativly
+     * map sons commutativity.
      *
-     * @param rule said rule
-     * @return mapped sons combined
-     * @throws Exception
+     * @param rule said rule.
+     * @return mapped sons combined.
+     * @throws Exception an exception.
      */
     @Override
     protected Map<String, Expression> mapSons(Expression rule) throws Exception {

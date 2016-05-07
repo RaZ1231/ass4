@@ -8,29 +8,29 @@ import interfaces.Expression;
 import interfaces.ExtendedExpression;
 
 /**
- * Class contains an expression and its power's sign
+ * Class contains an expression and its power's sign.
  *
  * @author Raziel Solomon
  * @since 07-May-16.
  */
 public class PolynomialExpression implements NestedExpression {
-    ExtendedExpression expression;
-    boolean isPositivePower;
+    private ExtendedExpression expression;
+    private boolean isPositivePower;
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param expression non - fraction expression
+     * @param expression non - fraction expression.
      */
     public PolynomialExpression(ExtendedExpression expression) {
         this(expression, true);
     }
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param expression      the expression
-     * @param isPositivePower opposite of is fraction
+     * @param expression      the expression.
+     * @param isPositivePower opposite of is fraction.
      */
     public PolynomialExpression(ExtendedExpression expression, boolean isPositivePower) {
         this.expression = expression;
@@ -38,9 +38,9 @@ public class PolynomialExpression implements NestedExpression {
     }
 
     /**
-     * string representation
+     * string representation.
      *
-     * @return
+     * @return a string.
      */
     @Override
     public String toString() {
@@ -52,25 +52,25 @@ public class PolynomialExpression implements NestedExpression {
     }
 
     /**
-     * get the expression
+     * get the expression.
      *
-     * @return expression
+     * @return expression.
      */
     public ExtendedExpression getExpression() {
         return expression;
     }
 
     /**
-     * opposite of is fraction
+     * opposite of is fraction.
      *
-     * @return true - not fraction/false - fraction
+     * @return true - not fraction/false - fraction.
      */
     public boolean isPositivePower() {
         return isPositivePower;
     }
 
     /**
-     * invert expression
+     * invert expression.
      */
     public void negate() {
         isPositivePower = !isPositivePower;
@@ -78,9 +78,9 @@ public class PolynomialExpression implements NestedExpression {
 
 
     /**
-     * return expression combined with power's sign
+     * return expression combined with power's sign.
      *
-     * @return signed expression
+     * @return signed expression.
      */
     public Expression toExpression() {
         if (isPositivePower()) {
@@ -91,10 +91,10 @@ public class PolynomialExpression implements NestedExpression {
     }
 
     /**
-     * combine two expressions
+     * combine two expressions.
      *
-     * @param other expression
-     * @return combined (binary) expression
+     * @param other expression.
+     * @return combined (binary) expression.
      */
     public BaseExpression toBaseExpression(NestedExpression other) {
         try {

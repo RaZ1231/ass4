@@ -2,7 +2,6 @@ package abstracts;
 
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -77,11 +76,11 @@ public abstract class UnaryExpression extends BaseExpression {
     }
 
     /**
-     * maps son by rule
+     * maps son by rule.
      *
-     * @param rule said rule
-     * @return mapped son
-     * @throws Exception
+     * @param rule said rule.
+     * @return mapped son.
+     * @throws Exception an exception.
      */
     @Override
     protected Map<String, Expression> mapSons(Expression rule) throws Exception {
