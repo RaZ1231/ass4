@@ -195,4 +195,15 @@ public class SimplificationTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void simplify18() throws Exception {
+        Parser p = new Parser();
+        Expression expression = p.toExpression("(((((((x + y) - x) + y) - x) + y) - x) - y)");
+
+        Expression expected = new Minus(new Mult(2, "y"), new Mult(2, "x"));
+        Expression actual = expression.simplify();
+
+        assertEquals(expected, actual);
+    }
 }

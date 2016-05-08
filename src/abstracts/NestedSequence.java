@@ -1,10 +1,13 @@
 package abstracts;
 
+import binary.Div;
 import interfaces.Expression;
 import interfaces.ExtendedExpression;
+import operands.Num;
+import unary.Neg;
+
 import java.util.ArrayList;
 import java.util.List;
-import operands.Num;
 
 /**
  * Class contains shared code between collections of nested expressions.
@@ -85,6 +88,7 @@ public abstract class NestedSequence {
      */
     public Expression simplify() throws Exception {
         boolean isSimplified = false;
+        BaseExpression baseExpression;
         Expression expression;
 
         for (int i = 0; i < size() - 1; i++) {
@@ -93,7 +97,23 @@ public abstract class NestedSequence {
                     try {
                         expression = new Num(get(i).toBaseExpression(get(j)).evaluate());
                     } catch (Exception e) {
-                        expression = get(i).toBaseExpression(get(j)).rulesSimplification();
+                        baseExpression = get(i).toBaseExpression(get(j));
+
+                        if (baseExpression instanceof Neg) {
+                            expression = ((Neg) baseExpression).getA();
+                        } else if (baseExpression instanceof Div && ((Div) baseExpression).getA().equals(new Num(1))) {
+                            expression = ((Div) baseExpression).getB();
+                        } else {
+                            expression = (Expression) baseExpression;
+                        }
+
+                        expression = ((BaseExpression) expression).rulesSimplification();
+
+                        if (baseExpression instanceof Neg) {
+                            expression = new Neg(expression);
+                        } else if (baseExpression instanceof Div && ((Div) baseExpression).getA().equals(new Num(1))) {
+                            expression = new Div(1, expression);
+                        }
                     }
 
 
