@@ -35,21 +35,21 @@ public abstract class BaseExpression {
                 simple = ((BaseExpression) simple).simplifySons();
             } catch (Exception ignored) {
                 continue;
-            }
-
-            try {
-                return new Num(simple.evaluate()); //try to evaluate
-            } catch (Exception e1) {
+            } finally {
                 try {
-                    simple = ((BaseExpression) simple).rulesSimplification();
-                } catch (Exception e2) {
+                    return new Num(simple.evaluate()); //try to evaluate
+                } catch (Exception e1) {
                     try {
-                        simple = ((BaseExpression) simple).linearSimplification();
-                    } catch (Exception e3) {
+                        simple = ((BaseExpression) simple).rulesSimplification();
+                    } catch (Exception e2) {
                         try {
-                            simple = ((BaseExpression) simple).polynomialSimplification();
-                        } catch (Exception e4) {
-                            break;
+                            simple = ((BaseExpression) simple).linearSimplification();
+                        } catch (Exception e3) {
+                            try {
+                                simple = ((BaseExpression) simple).polynomialSimplification();
+                            } catch (Exception e4) {
+                                break;
+                            }
                         }
                     }
                 }

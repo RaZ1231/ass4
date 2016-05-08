@@ -29,7 +29,7 @@ public class LogTest {
     }
 
     @Test
-    public void derivative() throws Exception {
+    public void derivative1() throws Exception {
         Expression a = new Log(new Num(4), new Var("x"));
         Expression expected = new Div(
                 new Num(1),
@@ -46,4 +46,21 @@ public class LogTest {
                 actual.toString());
     }
 
+    @Test
+    public void derivative2() throws Exception {
+        Expression a = new Log(new Plus("x", 2), new Plus(new Pow("x", 2), 9));
+        Expression expected = new Div(
+                new Minus(
+                        new Div(new Mult(new Log(new Const("e", Math.exp(1)), new Plus("x", 2)), new Mult(2, "x")),
+                                new Plus(new Pow("x", 2), 9)),
+                        new Div(new Log(new Const("e", Math.exp(1)), new Plus(new Pow("x", 2), 9)),
+                                new Plus("x", 2))),
+                new Pow(new Log(new Const("e", Math.exp(1)), new Plus("x", 2)), 2)
+        ).simplify();
+
+        Expression actual = a.differentiate("x").simplify();
+
+        Assert.assertEquals(expected.toString(),
+                actual.toString());
+    }
 }

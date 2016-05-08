@@ -136,10 +136,17 @@ public class Log extends BinaryExpression implements ExtendedExpression {
      */
     @Override
     public Expression differentiate(String var) {
-        return new Mult(
-                new Div(
-                        new Num(1), new Mult(getB(), new Log(new Const("e", Math.exp(1)), getA()))),
-                getB().differentiate(var));
+        if(getA().differentiate(var).equals(new Num(0))){
+            return new Mult(
+                    new Div(
+                            new Num(1), new Mult(getB(), new Log(new Const("e", Math.exp(1)), getA()))),
+                    getB().differentiate(var));
+        } else {
+            Div div = new Div(
+                    new Log(new Const("e", Math.exp(1)), getB()),
+                    new Log(new Const("e", Math.exp(1)), getA()));
+            return div.differentiate(var);
+        }
     }
 
     /**
